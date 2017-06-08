@@ -1,4 +1,4 @@
-Java-2D-engine Experimental branch
+Engine
 ==============
 
 **Features**
@@ -7,7 +7,7 @@ Java-2D-engine Experimental branch
 - Game loops
 - Many timing and logging utilities (To String custom format)
 
-[Licenced under Apache License 2.0](./LICENCE.md)
+[Licensed under MIT License](./LICENCE.md)
 
 If you want to contact me send me an e-mail here: lubomir.hlavko@gmail.com
 I will appreciate every optimization idea ! :)
