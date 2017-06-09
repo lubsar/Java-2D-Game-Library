@@ -15,7 +15,7 @@ public class RenderCanvas extends Canvas {
 	protected double scale = 1.0;
 	protected BufferStrategy bs;
 
-	public RenderCanvas(Screen screen,double scale){
+	public RenderCanvas(Screen screen, double scale) {
 		renderLayer = screen.getRenderLayer();
 		setPreferredSize(new Dimension((int)((screen.getWidth() + 10) * scale), (int)((screen.getHeight() + 10) * scale)));
 		
