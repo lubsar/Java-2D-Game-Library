@@ -1,7 +1,5 @@
 package svk.sglubos.oengine.test;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
@@ -12,14 +10,9 @@ import java.awt.image.ImageObserver;
 
 import svk.sglubos.oengine.core.BasicCore;
 import svk.sglubos.oengine.gfx.GameWindow;
-import svk.sglubos.oengine.gfx.Screen;
-import svk.sglubos.oengine.gfx.animation.Animation;
-import svk.sglubos.oengine.gfx.animation.SpriteAnimation;
-import svk.sglubos.oengine.gfx.sprite.Sprite;
-import svk.sglubos.oengine.gfx.sprite.SpriteSheet;
+import svk.sglubos.oengine.gfx.RenderBuffer;
 import svk.sglubos.oengine.input.Keyboard;
 import svk.sglubos.oengine.input.Mouse;
-import svk.sglubos.oengine.io.ImagePort;
 import svk.sglubos.oengine.utils.timer.Timer;
 
 /**
@@ -27,13 +20,12 @@ import svk.sglubos.oengine.utils.timer.Timer;
  * Game loop & stuff for testing
  */
 public class Game extends BasicCore implements ImageObserver {
-	private Screen mainScreen;
 	private GameWindow window;
-	private SpriteSheet sheet = new SpriteSheet(ImagePort.getImageAsResource("/AnimationTestingNumberSheet.png"), 20, 20);
-	private Sprite[] sprites = sheet.getSprites();
-	private Animation animation = new SpriteAnimation(sprites, 10, Timer.TIME_FORMAT_TICKS);
+//	private SpriteSheet sheet = new SpriteSheet(ImagePort.getImageAsResource("/AnimationTestingNumberSheet.png"), 20, 20);
+//	private Sprite[] sprites = sheet.getSprites();
+//	private Animation animation = new SpriteAnimation(sprites, 10, Timer.TIME_FORMAT_TICKS);
 //	private Sprite tile = new SpriteSheet(ImagePort.getImageAsResource("/isometric tile.png")).getSprite(0, 0, 45, 37);
-	private BufferedImage tile = toCompatibleImage(ImagePort.getImageAsResource("/isometric tile.png"));
+//	private BufferedImage tile = toCompatibleImage(ImagePort.getImageAsResource("/isometric tile.png"));
 //	private BufferedImage tile = ImagePort.getImageAsResource("/isometric tile.png");
 	
 	public static void main(String[] args) {
@@ -50,10 +42,9 @@ public class Game extends BasicCore implements ImageObserver {
 	 * Initializes game content before starting game loop 
 	 */
 	public void init(){
-		window = new GameWindow(1600, 900, "game", Color.white);
+		window = new GameWindow(1600, 900, "game");
 		window.setResizable(true);
-		mainScreen = window.getScreen();
-		mainScreen.setFont(new Font("Arial", Font.BOLD, 15));
+
 		
 		Mouse.bind(window.getRenderCanvas());
 		Keyboard.bind(window.getRenderCanvas());
@@ -63,10 +54,10 @@ public class Game extends BasicCore implements ImageObserver {
 	/**
 	 * Updates game content.
 	 */
-	
+	float scale = 0.5f;
 	public void tick(){
-		if(Keyboard.isKeyPressed(KeyEvent.VK_W)) {
-			mainScreen.setOffset(mainScreen.getXOffset(), mainScreen.getYOffset() -10);
+		if(Keyboard.isClicked(KeyEvent.VK_W)) {
+			window.getRenderCanvas().setRenderBuffer(new RenderBuffer(800,600), scale+=0.1);
 		}
 		if(Keyboard.isKeyPressed(KeyEvent.VK_S)) {
 			mainScreen.setOffset(mainScreen.getXOffset(), mainScreen.getYOffset() +10);
@@ -78,17 +69,17 @@ public class Game extends BasicCore implements ImageObserver {
 			mainScreen.setOffset(mainScreen.getXOffset() + 10, mainScreen.getYOffset());
 		}
 		
-		if(Keyboard.isKeyPressed(KeyEvent.VK_ENTER)) {
-			animation.startReverse(true);
-		}
-		
-		if(Keyboard.isKeyPressed(KeyEvent.VK_BACK_SPACE)) {
-			animation.stop();
-		}
-		
-		if(Keyboard.isClicked(KeyEvent.VK_E)) {
-			System.out.println("clicked");
-		}
+//		if(Keyboard.isKeyPressed(KeyEvent.VK_ENTER)) {
+//			animation.startReverse(true);
+//		}
+//		
+//		if(Keyboard.isKeyPressed(KeyEvent.VK_BACK_SPACE)) {
+//			animation.stop();
+//		}
+//		
+//		if(Keyboard.isClicked(KeyEvent.VK_E)) {
+//			System.out.println("clicked");
+//		}
 	}
 	
 	/**
@@ -97,7 +88,7 @@ public class Game extends BasicCore implements ImageObserver {
 	int x;
 	int y;
 	public void render(){
-		mainScreen.clear();
+//		mainScreen.clear();
 		
 //		mainScreen.setColor(Color.white);
 //		mainScreen.renderRectangle(0, 0, 10, 10);
@@ -107,13 +98,13 @@ public class Game extends BasicCore implements ImageObserver {
 			for(int b = 0; b < 100; b++) {
 				y += 13;
 				x += 22;
-				mainScreen.renderImage(tile, x, y);
+//				mainScreen.renderImage(tile, x, y);
 //				mainScreen.renderSprite(tile, x, y);
 //				mainScreen.getGraphics().drawImage(tile, x, y, this);
 			}
 		}
 		
-		window.showRenderedContent();
+//		window.showRenderedContent();
 	}
 
 	@Override

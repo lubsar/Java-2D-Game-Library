@@ -1,6 +1,5 @@
 package svk.sglubos.oengine.gfx.animation;
 
-import svk.sglubos.oengine.gfx.Screen;
 import svk.sglubos.oengine.gfx.sprite.Sprite;
 import svk.sglubos.oengine.gfx.sprite.SpriteSheet;
 import svk.sglubos.oengine.utils.debug.DebugStringBuilder;
@@ -19,8 +18,8 @@ public class SpriteAnimation extends Animation {
 	}
 
 	@Override
-	public void render(Screen screen, int x, int y) {
-		screen.renderSprite(sprites[currentFrame], x, y);
+	public void render(AnimationRenderer renderer, int x, int y) {
+		renderer.render(sprites[currentFrame], x, y);
 	}
 	
 	public String toString() {

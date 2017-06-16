@@ -1,6 +1,5 @@
 package svk.sglubos.oengine.gfx.animation;
 
-import svk.sglubos.oengine.gfx.Screen;
 import svk.sglubos.oengine.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.utils.debug.MessageHandler;
 import svk.sglubos.oengine.utils.timer.LoopTimerTask;
@@ -38,7 +37,7 @@ public abstract class Animation {
 		initStartAndEnd(startFrame, endFrame);
 	}
 	
-	public abstract void render(Screen screen, int x, int y);
+	public abstract void render(AnimationRenderer renderer, int x, int y);
 	
 	public void start(boolean loop) {
 		if(running) {

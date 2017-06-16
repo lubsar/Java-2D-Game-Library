@@ -1,7 +1,6 @@
 package svk.sglubos.oengine.gfx;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -15,46 +14,47 @@ import svk.sglubos.oengine.utils.debug.DebugStringBuilder;
 
 @SuppressWarnings("serial")
 public class GameWindow extends JFrame {
-	protected double widthScale;
-	protected double heightScale;
+	protected float widthScale;
+	protected float heightScale;
 	
-	protected Screen screen;
+	protected boolean isFullscreen = false;
+	
+	protected RenderBuffer renderBuffer;
 	protected RenderCanvas canvas;
 	protected GraphicsDevice device;
 	
 	public GameWindow(int screenWidth, int screenHeight, String title) {
-		this(screenWidth, screenHeight, title, 1.0, Color.black, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
+		this(screenWidth, screenHeight, title, 1.0f, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
 	}
 	
-	public GameWindow(int screenWidth,int screenHeight, String title, double canvasScale){
-		this(screenWidth, screenHeight, title, canvasScale, Color.black, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
+	public GameWindow(int screenWidth, int screenHeight, String title, float canvasScale) {
+		this(screenWidth, screenHeight, title, canvasScale, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
 	}
 	
-	public GameWindow(int screenWidth, int screenHeight, String title, Color defaultScreenColor){
-		this(screenWidth, screenHeight, title, 1.0, defaultScreenColor, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
-	}
-	
-	public GameWindow(int screenWidth, int screenHeight, String title, double canvasScale, Color defaultScreenColor) {
-		this(screenWidth, screenHeight, title, canvasScale, defaultScreenColor, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
-	}
-	
-	public GameWindow(int screenWidth, int screenHeight, String title, double screenScale, Color defaultScreenColor, GraphicsDevice graphicsDevice) {
+	public GameWindow(int screenWidth, int screenHeight, String title, float screenScale, GraphicsDevice graphicsDevice) {
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
-		screen = new Screen(screenWidth, screenHeight, defaultScreenColor);
-		canvas = new RenderCanvas(screen, screenScale);
+		renderBuffer = new RenderBuffer(screenWidth, screenHeight);
+		canvas = new RenderCanvas(renderBuffer, screenScale);
+		canvas.setBufferChangeCallback(() -> {
+			dispose();
+			pack();
+			setLocationRelativeTo(null);
+			setVisible(true);
+			setFullScreen(isFullscreen);
+			canvas.requestFocusInWindow();
+		});
 		
 		add(canvas, BorderLayout.CENTER);
 		pack();
 		setLocationRelativeTo(null);
 		getContentPane().addComponentListener(new ComponentListener(){
-
 			@Override
 			public void componentResized(ComponentEvent e) {
-				 widthScale = (double)e.getComponent().getWidth() / screen.width;
-				 heightScale = (double)e.getComponent().getHeight() / screen.height;
+				 widthScale = (float)(e.getComponent().getWidth() / renderBuffer.width);
+				 heightScale = (float)(e.getComponent().getHeight() / renderBuffer.height);
 			}
 			@Override
 			public void componentMoved(ComponentEvent e) {}
@@ -73,15 +73,15 @@ public class GameWindow extends JFrame {
 		canvas.showRenderedContent();
 	}
 	
-	public void setFullScreenMode(boolean fullScreen) {
+	public void setFullScreen(boolean fullScreen) {
+		this.isFullscreen = fullScreen;
 		if(device == null || !device.isFullScreenSupported()) {
 			simulateFullScreen(fullScreen);
 		} else {
+			setWindowDecoration(!fullScreen);
 			if(fullScreen){
-				setWindowDecoration(true);
 				device.setFullScreenWindow(this);
 			} else {
-				setWindowDecoration(false);
 				device.setFullScreenWindow(null);
 			}
 		}
@@ -99,7 +99,7 @@ public class GameWindow extends JFrame {
 	
 	protected void setWindowDecoration(boolean decorated) {
 		dispose();
-		setUndecorated(decorated);
+		setUndecorated(!decorated);
 		pack();
 		setVisible(true);
 		canvas.init(2);
@@ -115,19 +115,19 @@ public class GameWindow extends JFrame {
 		}
 	}
 	
-	public Screen getScreen() {
-		return screen;
+	public RenderBuffer getRenderBuffer() {
+		return renderBuffer;
 	}
 	
 	public RenderCanvas getRenderCanvas() {
 		return canvas;
 	}
 	
-	public double getWidthScale() {
+	public float getWidthScale() {
 		return widthScale;
 	}
 	
-	public double getHeightScale() {
+	public float getHeightScale() {
 		return heightScale;
 	}
 	
@@ -147,7 +147,7 @@ public class GameWindow extends JFrame {
 		ret.appendln(super.toString());
 		ret.append("widthScale", widthScale);
 		ret.append("heightScale", heightScale);
-		ret.append(screen, "screen");
+		ret.append(renderBuffer, "screen");
 		ret.append(canvas, "canvas");
 		ret.append(device, "device");
 		ret.decreaseLayer();

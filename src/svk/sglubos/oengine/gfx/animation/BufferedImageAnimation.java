@@ -2,7 +2,6 @@ package svk.sglubos.oengine.gfx.animation;
 
 import java.awt.image.BufferedImage;
 
-import svk.sglubos.oengine.gfx.Screen;
 import svk.sglubos.oengine.utils.debug.DebugStringBuilder;
 
 //TODO Documentation
@@ -15,8 +14,8 @@ public class BufferedImageAnimation extends Animation {
 	}
 
 	@Override
-	public void render(Screen screen, int x, int y) {
-		screen.renderImage(images[currentFrame], x, y);
+	public void render(AnimationRenderer renderer, int x, int y) {
+		renderer.renderImage(images[currentFrame], x, y);
 	}
 	
 	public String toString() {
