@@ -4,31 +4,31 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import svk.sglubos.oengine.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.utils.debug.MessageHandler;
 
 @SuppressWarnings("serial")
 public class RenderCanvas extends Canvas {
-	protected BufferedImage renderLayer;
+	protected RenderBuffer buffer;
 	protected float scale = 1.0f;
 	protected BufferStrategy bs;
 	
 	private Callback renderBufferCb;
 	
 	public RenderCanvas(RenderBuffer buffer, float scale) {
-		renderLayer = buffer.renderLayer;
+		super();
 		setPreferredSize(new Dimension((int)((buffer.width + 10) * scale), (int)((buffer.height + 10) * scale)));
 		
+		this.buffer = buffer;
 		this.scale = scale;
 	}
 	
 	public void setRenderBuffer(RenderBuffer buffer, float scale) {
-		this.renderLayer = buffer.renderLayer;
-		this.scale = scale;
 		setPreferredSize(new Dimension((int)((buffer.width + 10) * scale), (int)((buffer.height + 10) * scale)));
 		
+		this.buffer = buffer;
+		this.scale = scale;
 		renderBufferCb.callback();
 	}
 	
@@ -59,7 +59,7 @@ public class RenderCanvas extends Canvas {
 		do {
 		    try{
 		    	g = bs.getDrawGraphics();
-		    	g.drawImage(renderLayer, 0, 0, getWidth(),getHeight(), null);
+		    	g.drawImage(buffer.renderLayer, 0, 0, getWidth(),getHeight(), null);
 		    } finally {
 		    	if(g != null)
 		    		g.dispose();
@@ -76,7 +76,7 @@ public class RenderCanvas extends Canvas {
 		ret.increaseLayer();
 		ret.appendln(super.toString());
 		ret.append("scale", scale);
-		ret.append(renderLayer, "renderlayer");
+		ret.append(buffer, "renderBuffer");
 		ret.append(bs, "bs");
 		ret.decreaseLayer();
 		ret.appendCloseBracket();

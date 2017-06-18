@@ -6,6 +6,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -24,19 +25,23 @@ public class GameWindow extends JFrame {
 	protected GraphicsDevice device;
 	
 	public GameWindow(int screenWidth, int screenHeight, String title) {
-		this(screenWidth, screenHeight, title, 1.0f, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
+		this(new RenderBuffer(screenWidth, screenHeight, BufferedImage.TYPE_INT_RGB, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()), title, 1.0f, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
 	}
 	
 	public GameWindow(int screenWidth, int screenHeight, String title, float canvasScale) {
-		this(screenWidth, screenHeight, title, canvasScale, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
+		this(new RenderBuffer(screenWidth, screenHeight,BufferedImage.TYPE_INT_RGB, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()), title, canvasScale, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
 	}
 	
-	public GameWindow(int screenWidth, int screenHeight, String title, float screenScale, GraphicsDevice graphicsDevice) {
+	public GameWindow(RenderBuffer buffer, String title) {
+		this(buffer, title, 1.0f, GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice());
+	}
+	
+	public GameWindow(RenderBuffer buffer, String title, float screenScale, GraphicsDevice graphicsDevice) {
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
-		renderBuffer = new RenderBuffer(screenWidth, screenHeight);
+		renderBuffer = buffer;
 		canvas = new RenderCanvas(renderBuffer, screenScale);
 		canvas.setBufferChangeCallback(() -> {
 			dispose();
@@ -67,6 +72,10 @@ public class GameWindow extends JFrame {
 		
 		canvas.init(2);
 		this.device = graphicsDevice;
+	}
+	
+	public GameWindow(int screenWidth, int screenHeight, String title, float screenScale, GraphicsDevice graphicsDevice) {
+		this(new RenderBuffer(screenWidth, screenHeight, BufferedImage.TYPE_INT_RGB, graphicsDevice), title, screenScale, graphicsDevice);
 	}
 	
 	public void showRenderedContent() {
