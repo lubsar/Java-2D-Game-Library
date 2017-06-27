@@ -33,6 +33,7 @@ public class RenderBuffer {
 		this.height = height;
 	}
 	
+	
 	//TODO BREAKS renderers (graphics and pixels[] references if set after buffer is bound to a renderer)
 	public void setOptimizedPipelineOnly(boolean optimized) {
 		if(optimized && !this.optimizedPipeline) {

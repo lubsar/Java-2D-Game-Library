@@ -15,9 +15,14 @@ public class BasicRenderer extends Renderer implements SpriteRenderer {
 	protected int yOffset = 0;
 	protected boolean ignoreOffset;
 
-	protected Color defaultColor;
+	protected Color clearColor;
 	protected int fontSize;
-
+	
+	public BasicRenderer() {
+		clearColor = Color.BLACK;
+		fontSize = renderGraphics.getFont().getSize();
+	}
+	
 	public void renderFilledRectangle(int x, int y, int width, int height, Color color) {
 		setColor(color);
 
@@ -300,16 +305,30 @@ public class BasicRenderer extends Renderer implements SpriteRenderer {
 	}
 
 	public void clear() {
-		int colorValue = defaultColor.getRGB();
-		for (int i = 0; i < bufferPixels.length; i++) {
-			bufferPixels[i] = colorValue;
+		if (!buffer.optimizedPipeline) {
+			int colorValue = clearColor.getRGB();
+			for (int i = 0; i < bufferPixels.length; i++) {
+				bufferPixels[i] = colorValue;
+			}
+		} else {
+			Color temp = renderGraphics.getColor();
+			renderGraphics.setColor(clearColor);
+			renderGraphics.fillRect(0, 0, bufferWidth, bufferHeight);
+			renderGraphics.setColor(temp);
 		}
 	}
 
 	public void clear(Color color) {
-		int colorValue = color.getRGB();
-		for (int i = 0; i < bufferPixels.length; i++) {
-			bufferPixels[i] = colorValue;
+		if (!buffer.optimizedPipeline) {
+			int colorValue = color.getRGB();
+			for (int i = 0; i < bufferPixels.length; i++) {
+				bufferPixels[i] = colorValue;
+			}
+		} else {
+			Color temp = renderGraphics.getColor();
+			renderGraphics.setColor(color);
+			renderGraphics.fillRect(0, 0, bufferWidth, bufferHeight);
+			renderGraphics.setColor(temp);
 		}
 	}
 
@@ -381,7 +400,7 @@ public class BasicRenderer extends Renderer implements SpriteRenderer {
 		ret.append("xOffset", xOffset);
 		ret.append("yOffset", yOffset);
 
-		ret.append(defaultColor, "defaultColor");
+		ret.append(clearColor, "clearColor");
 		ret.append(renderGraphics, "renderGraphics");
 		ret.append(buffer, "renderBuffer");
 		ret.append(bufferPixels, "bufferPixels");
