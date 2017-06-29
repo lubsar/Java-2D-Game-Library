@@ -2,9 +2,9 @@ package svk.sglubos.oengine.test;
 
 import java.awt.Color;
 
-import svk.sglubos.oengine.core.SyncedCore;
-import svk.sglubos.oengine.gfx.GameWindow;
-import svk.sglubos.oengine.gfx.Screen;
+import svk.sglubos.oengine.lib.core.SyncedCore;
+import svk.sglubos.oengine.lib.gfx.GameWindow;
+import svk.sglubos.oengine.lib.gfx.Screen;
 
 public class NoiseTest extends SyncedCore{
 	private GameWindow window;

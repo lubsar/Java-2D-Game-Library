@@ -2,11 +2,11 @@ package svk.sglubos.oengine.test;
 
 import java.awt.Color;
 
-import svk.sglubos.oengine.core.BasicCore;
-import svk.sglubos.oengine.gfx.BasicRenderer;
-import svk.sglubos.oengine.gfx.GameWindow;
-import svk.sglubos.oengine.input.Keyboard;
-import svk.sglubos.oengine.input.Mouse;
+import svk.sglubos.oengine.lib.core.BasicCore;
+import svk.sglubos.oengine.lib.gfx.BasicRenderer;
+import svk.sglubos.oengine.lib.gfx.GameWindow;
+import svk.sglubos.oengine.lib.input.Keyboard;
+import svk.sglubos.oengine.lib.input.Mouse;
 
 public class Game extends BasicCore {
 	private GameWindow window;

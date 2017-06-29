@@ -2,9 +2,9 @@ package svk.sglubos.oengine.test;
 
 import java.io.FileNotFoundException;
 
-import svk.sglubos.oengine.utils.log.Logger;
-import svk.sglubos.oengine.utils.log.LoggingUtilities;
-import svk.sglubos.oengine.utils.log.basic.BasicLog;
+import svk.sglubos.oengine.lib.utils.log.Logger;
+import svk.sglubos.oengine.lib.utils.log.LoggingUtilities;
+import svk.sglubos.oengine.lib.utils.log.basic.BasicLog;
 
 public class LoggingTest {
 	private BasicLog local;

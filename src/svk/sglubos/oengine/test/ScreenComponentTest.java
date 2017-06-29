@@ -1,6 +1,6 @@
 package svk.sglubos.oengine.test;
 
-import svk.sglubos.oengine.gfx.ScreenComponent;
+import svk.sglubos.oengine.lib.gfx.ScreenComponent;
 
 public class ScreenComponentTest extends ScreenComponent {
 	

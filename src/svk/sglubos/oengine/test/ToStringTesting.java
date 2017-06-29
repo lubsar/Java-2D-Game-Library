@@ -3,13 +3,13 @@ package svk.sglubos.oengine.test;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import svk.sglubos.oengine.gfx.GameWindow;
-import svk.sglubos.oengine.gfx.RenderCanvas;
-import svk.sglubos.oengine.gfx.Screen;
-import svk.sglubos.oengine.gfx.animation.BufferedImageAnimation;
-import svk.sglubos.oengine.gfx.sprite.Sprite;
-import svk.sglubos.oengine.gfx.sprite.SpriteSheet;
-import svk.sglubos.oengine.utils.timer.Timer;
+import svk.sglubos.oengine.lib.gfx.GameWindow;
+import svk.sglubos.oengine.lib.gfx.RenderCanvas;
+import svk.sglubos.oengine.lib.gfx.Screen;
+import svk.sglubos.oengine.lib.gfx.animation.BufferedImageAnimation;
+import svk.sglubos.oengine.lib.gfx.sprite.Sprite;
+import svk.sglubos.oengine.lib.gfx.sprite.SpriteSheet;
+import svk.sglubos.oengine.lib.utils.timer.Timer;
 
 public class ToStringTesting {
 	
