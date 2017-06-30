@@ -305,7 +305,7 @@ public class BasicRenderer extends Renderer implements SpriteRenderer {
 	}
 
 	public void clear() {
-		if (!buffer.optimizedPipeline) {
+		if (!optimizedPipeline) {
 			int colorValue = clearColor.getRGB();
 			for (int i = 0; i < bufferPixels.length; i++) {
 				bufferPixels[i] = colorValue;
@@ -319,7 +319,7 @@ public class BasicRenderer extends Renderer implements SpriteRenderer {
 	}
 
 	public void clear(Color color) {
-		if (!buffer.optimizedPipeline) {
+		if (!optimizedPipeline) {
 			int colorValue = color.getRGB();
 			for (int i = 0; i < bufferPixels.length; i++) {
 				bufferPixels[i] = colorValue;

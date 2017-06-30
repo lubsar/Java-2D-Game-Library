@@ -10,11 +10,13 @@ import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
 
 @SuppressWarnings("serial")
 public class RenderCanvas extends Canvas {
+	public static final byte BUFFER_CHANGED = 0x0;
+	
 	protected RenderBuffer buffer;
 	protected float scale = 1.0f;
 	protected BufferStrategy bs;
 	
-	private Callback renderBufferCb;
+	private GFXCallback renderBufferCb;
 	
 	public RenderCanvas(RenderBuffer buffer, float scale) {
 		super();
@@ -29,10 +31,10 @@ public class RenderCanvas extends Canvas {
 		
 		this.buffer = buffer;
 		this.scale = scale;
-		renderBufferCb.callback();
+		renderBufferCb.callback(GFXEvent.CAN_BUFF_CHANGED);
 	}
 	
-	public void setBufferChangeCallback(Callback cb) {
+	public void setBufferChangeCallback(GFXCallback cb) {
 		this.renderBufferCb = cb;
 	}
 	

@@ -1,6 +1,5 @@
 package svk.sglubos.oengine.lib.gfx.animation;
 
-import svk.sglubos.oengine.gfx.animation.AnimationRenderer;
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
 import svk.sglubos.oengine.lib.utils.timer.LoopTimerTask;

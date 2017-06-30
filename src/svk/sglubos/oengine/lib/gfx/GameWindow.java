@@ -43,7 +43,7 @@ public class GameWindow extends JFrame {
 		
 		renderBuffer = buffer;
 		canvas = new RenderCanvas(renderBuffer, screenScale);
-		canvas.setBufferChangeCallback(() -> {
+		canvas.setBufferChangeCallback((params) -> {
 			dispose();
 			pack();
 			setLocationRelativeTo(null);
