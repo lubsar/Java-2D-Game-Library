@@ -7,13 +7,13 @@ import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 public class SpriteAnimation extends Animation {
 	protected Sprite[] sprites;
 	//fix NullPointer
-	public SpriteAnimation(Sprite[] sprites, double frameDelay, byte timeFormat) {
-		super(frameDelay, timeFormat, sprites.length);			
+	public SpriteAnimation(Sprite[] sprites, int frameDelayTicks, byte timeFormat) {
+		super(frameDelayTicks, sprites.length);			
 		this.sprites = sprites;
 	}
 	
-	public SpriteAnimation(SpriteSheet spriteSheet, double frameDelay, int startFrame, int endFrame, byte timeFormat) {
-		super(frameDelay, startFrame, endFrame, spriteSheet.getSprites().length, timeFormat);
+	public SpriteAnimation(SpriteSheet spriteSheet, int frameDelayTicks, int startFrame, int endFrame) {
+		super(frameDelayTicks, startFrame, endFrame, spriteSheet.getSprites().length);
 		this.sprites = spriteSheet.getSprites();
 	}
 

@@ -8,8 +8,8 @@ import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 public class BufferedImageAnimation extends Animation {
 	protected BufferedImage[] images;
 	
-	public BufferedImageAnimation(BufferedImage[] images, long frameDelay, byte timeFormat, int frames) {
-		super(frameDelay, timeFormat, frames);
+	public BufferedImageAnimation(BufferedImage[] images, int frameDelayTicks, int frames) {
+		super(frameDelayTicks, frames);
 		this.images = images;
 	}
 
