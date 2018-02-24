@@ -2,10 +2,10 @@ Engine
 ==============
 
 **Features**
-- 2D rendering using java`s Graphics 2D API and/or custom rendering based on changing color values in pixel array in drawing buffer
+- 2D rendering using java`s Graphics 2D API and/or rendering based on changing color values directly in pixel array of drawing buffer
 - Mouse and Keyboard input handling
-- Game loops
-- Many timing and logging utilities (To String custom format)
+- Game loop
+- Many timing and logging utilities
 
 [Licensed under MIT License](./LICENCE.md)
 
