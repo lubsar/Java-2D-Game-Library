@@ -49,19 +49,20 @@ public class Vec2f {
 		return (float) Math.sqrt((x * x) + (y * y));
 	}
 	
+	public void transform(Mat2f matrix) {
+		float x = matrix.a * this.x + matrix.b * this.y;
+		float y = matrix.c * this.x + matrix.d * this.y;
+		
+		this.x = x;
+		this.y = y;
+	}
+	
 	public static float distance(Vec2f vec1, Vec2f vec2) {
 		float x = vec1.x - vec2.x;
 		float y = vec1.y - vec2.y;
 		return (float) Math.sqrt((x * x) + (y * y));
 	}
-	
-	
-	public static Vec2f normalize(Vec2f vec) {
-		float length = (float) Math.sqrt(vec.x * vec.x + vec.y * vec.y);
 		
-		return new Vec2f(vec.x / length, vec.y / length);
-	}
-	
 	public static Vec2f add(Vec2f vec1, Vec2f vec2) {
 		return new Vec2f(vec1.x + vec2.x, vec1.y + vec2.y);
 	}
@@ -76,5 +77,22 @@ public class Vec2f {
 	
 	public static float dot(Vec2f vec1, Vec2f vec2) {
 		return vec1.x * vec2.x + vec1.y * vec2.y;
+	}
+	
+	public static float length(Vec2f vec) {
+		return (float) Math.sqrt(vec.x * vec.x + vec.y * vec.y);
+	}
+	
+	public static Vec2f normalize(Vec2f vec) {
+		float length = (float) Math.sqrt(vec.x * vec.x + vec.y * vec.y);
+		
+		return new Vec2f(vec.x / length, vec.y / length);
+	}
+	
+	public static Vec2f transform(Vec2f vec, Mat2f matrix) {
+		float x = matrix.a * vec.x + matrix.b * vec.y;
+		float y = matrix.c * vec.x + matrix.d * vec.y;
+		
+		return new Vec2f(x, y);
 	}
 }
