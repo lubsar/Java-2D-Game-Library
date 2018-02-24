@@ -3,24 +3,81 @@ package svk.sglubos.oengine.lib.gfx;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import svk.sglubos.oengine.lib.gfx.sprite.Sprite;
-import svk.sglubos.oengine.lib.gfx.sprite.SpriteRenderer;
+import svk.sglubos.oengine.lib.gfx.event.GFXCallback;
+import svk.sglubos.oengine.lib.gfx.event.GFXEvent;
+import svk.sglubos.oengine.lib.gfx.sprite.AbstractSpriteRenderer;
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
 
-public class BasicRenderer extends Renderer implements SpriteRenderer {
+public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveRenderer {
+	protected RenderBuffer buffer = null;
+	protected int[] bufferPixels = null;
+	protected boolean optimizedPipeline = false;
+	
+	protected int bufferWidth;
+	protected int bufferHeight;
+	
 	protected int xOffset = 0;
 	protected int yOffset = 0;
 	protected boolean ignoreOffset;
 
 	protected Color clearColor;
-	protected int fontSize;
+	protected int fontSize = -1;
+	
+	protected Graphics renderGraphics;
+	
+	private GFXCallback bufferCallback = (event) -> {
+		if(event == GFXEvent.BUFF_PIPE_LOCKED) {
+			this.bufferPixels = null;
+			this.optimizedPipeline = true;
+		} else {
+			this.bufferPixels = buffer.pixels;
+			this.optimizedPipeline = false;
+		}
+	};
+	
+	@Override
+	public RenderBuffer getBuffer() {
+		return buffer;
+	}
+	
+	@Override
+	public void setBuffer(RenderBuffer buffer) {
+		if(this.buffer != null) {
+			buffer.removeEventCallback(bufferCallback);
+		}
+		
+		this.buffer = buffer;
+		this.bufferHeight = buffer.height;
+		this.bufferWidth = buffer.width;
+		this.bufferPixels = buffer.pixels;
+		this.renderGraphics = buffer.g;
+		
+		this.buffer.addEventCallback(bufferCallback);
+		this.optimizedPipeline = buffer.optimizedPipeline;
+	}
+	
+	@Override
+	public int getBufferWidth() {
+		return bufferWidth;
+	}
+	
+	@Override
+	public int getBufferHeight() {
+		return bufferHeight;
+	}
 	
 	public BasicRenderer() {
 		clearColor = Color.BLACK;
-		fontSize = renderGraphics.getFont().getSize();
+	}
+	
+	public BasicRenderer(RenderBuffer buffer) {
+		this();
+		setBuffer(buffer);
 	}
 	
 	public void renderFilledRectangle(int x, int y, int width, int height, Color color) {
@@ -108,6 +165,10 @@ public class BasicRenderer extends Renderer implements SpriteRenderer {
 	}
 
 	public void renderString(String text, int x, int y) {
+		if(fontSize == -1) {
+			fontSize = renderGraphics.getFontMetrics().getHeight();
+		}
+		
 		y += fontSize;
 
 		if (!ignoreOffset) {

@@ -4,22 +4,22 @@ import java.awt.GraphicsDevice;
 import java.util.HashMap;
 import java.util.Map;
 
+import svk.sglubos.oengine.lib.gfx.AbstractRenderer;
 import svk.sglubos.oengine.lib.gfx.GameWindow;
 import svk.sglubos.oengine.lib.gfx.RenderBuffer;
-import svk.sglubos.oengine.lib.gfx.Renderer;
 
 public class EngineGraphicsEnvironment {
 	private GraphicsDevice device;
 	
 	public Map<String, GameWindow> windows = new HashMap<String, GameWindow>(1);
-	public Map<String, Renderer> renderers = new HashMap<String, Renderer>(3);
+	public Map<String, AbstractRenderer> renderers = new HashMap<String, AbstractRenderer>(3);
 	public Map<String, RenderBuffer> buffers = new HashMap<String, RenderBuffer>(1);
 	
 	public EngineGraphicsEnvironment(GraphicsDevice device) {
 		this.device = device;
 	}
 	
-	public void bindRenderer(String windowID, Renderer renderer) {
+	public void bindRenderer(String windowID, AbstractRenderer renderer) {
 		renderer.setBuffer(buffers.get(windowID));
 	}
 	

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import svk.sglubos.oengine.lib.gfx.event.GFXCallback;
+import svk.sglubos.oengine.lib.gfx.event.GFXEvent;
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
 

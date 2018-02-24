@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 
-public interface PrimitiveRenderer {
+public interface AbstractPrimitiveRenderer extends AbstractRenderer {
 	public void renderFilledRectangle(int x, int y, int width, int height, Color color);
 	public void renderRectangle(int x, int y, int width, int height, Color color);
 	public void renderImage(BufferedImage img, int x, int y, int width, int height);

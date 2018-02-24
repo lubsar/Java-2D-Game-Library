@@ -1,10 +1,11 @@
 package svk.sglubos.oengine.lib.gfx.animation;
 
+import svk.sglubos.oengine.lib.gfx.sprite.AbstractSpriteRenderer;
 import svk.sglubos.oengine.lib.gfx.sprite.Sprite;
 import svk.sglubos.oengine.lib.gfx.sprite.SpriteSheet;
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 
-public class SpriteAnimation extends Animation {
+public class SpriteAnimation extends Animation<AbstractSpriteRenderer> {
 	protected Sprite[] sprites;
 	//fix NullPointer
 	public SpriteAnimation(Sprite[] sprites, int frameDelayTicks, byte timeFormat) {
@@ -18,7 +19,7 @@ public class SpriteAnimation extends Animation {
 	}
 
 	@Override
-	public void render(AnimationRenderer renderer, int x, int y) {
+	public void render(AbstractSpriteRenderer renderer, int x, int y) {
 		renderer.render(sprites[currentFrame], x, y);
 	}
 	

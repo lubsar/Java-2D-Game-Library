@@ -1,10 +1,10 @@
 package svk.sglubos.oengine.lib.gfx.animation;
 
+import svk.sglubos.oengine.lib.gfx.AbstractRenderer;
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
-import svk.sglubos.oengine.lib.utils.timer.Timer;
 
-public abstract class Animation {
+public abstract class Animation<T extends AbstractRenderer> {
 	protected int frameDelayTicks;
 	protected int frames;
 
@@ -29,7 +29,7 @@ public abstract class Animation {
 		initStartAndEnd(startFrame, endFrame);
 	}
 
-	public abstract void render(AnimationRenderer renderer, int x, int y);
+	public abstract void render(T renderer, int x, int y);
 
 	public void update() {
 		if(!running) {
@@ -70,11 +70,6 @@ public abstract class Animation {
 		if (startFrame == endFrame) {
 			currentFrame = endFrame;
 			return;
-		}
-
-		if (!Timer.isInitialized()) {
-			MessageHandler.printMessage("ANIMATION", MessageHandler.ERROR, "Timer is not initialized !");
-			throw new IllegalStateException("Timer is not initialized !");
 		}
 
 		currentFrame = endFrame;

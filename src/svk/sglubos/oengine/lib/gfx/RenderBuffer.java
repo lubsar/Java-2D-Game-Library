@@ -7,6 +7,8 @@ import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
 import java.util.List;
 
+import svk.sglubos.oengine.lib.gfx.event.GFXCallback;
+import svk.sglubos.oengine.lib.gfx.event.GFXEvent;
 import svk.sglubos.oengine.lib.gfx.utils.ImageOptimizer;
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 
@@ -17,7 +19,7 @@ public class RenderBuffer {
 	protected int width;
 	protected int height;
 	protected int[] pixels = null;
-	protected boolean optimizedPipeline = true;
+	protected boolean optimizedPipeline = false;
 	
 	protected BufferedImage renderLayer;
 	protected Graphics g;
@@ -30,6 +32,7 @@ public class RenderBuffer {
 		
 		this.width = width;
 		this.height = height;
+		this.pixels = ((DataBufferInt)renderLayer.getRaster().getDataBuffer()).getData();
 	}
 	
 	public RenderBuffer(int width, int height) {
