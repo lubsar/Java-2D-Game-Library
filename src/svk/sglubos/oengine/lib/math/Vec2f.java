@@ -50,8 +50,16 @@ public class Vec2f {
 	}
 	
 	public void transform(Mat2f matrix) {
-		float x = matrix.a * this.x + matrix.b * this.y;
-		float y = matrix.c * this.x + matrix.d * this.y;
+		float x = matrix.mat[0] * this.x + matrix.mat[1] * this.y;
+		float y = matrix.mat[2] * this.x + matrix.mat[3] * this.y;
+		
+		this.x = x;
+		this.y = y;
+	}
+	
+	public void affineTransform(Mat3f matrix) {
+		float x = matrix.mat[0] * this.x + matrix.mat[1] * this.y + matrix.mat[2];
+		float y = matrix.mat[3] * this.x + matrix.mat[4] * this.y + matrix.mat[5];
 		
 		this.x = x;
 		this.y = y;
@@ -90,8 +98,15 @@ public class Vec2f {
 	}
 	
 	public static Vec2f transform(Vec2f vec, Mat2f matrix) {
-		float x = matrix.a * vec.x + matrix.b * vec.y;
-		float y = matrix.c * vec.x + matrix.d * vec.y;
+		float x = matrix.mat[0] * vec.x + matrix.mat[1] * vec.y;
+		float y = matrix.mat[2] * vec.x + matrix.mat[3] * vec.y;
+		
+		return new Vec2f(x, y);
+	}
+	
+	public static Vec2f affineTransfomr(Vec2f vec, Mat3f matrix) {
+		float x = matrix.mat[0] * vec.x + matrix.mat[1] * vec.y + matrix.mat[2];
+		float y = matrix.mat[3] * vec.x + matrix.mat[4] * vec.y + matrix.mat[5];
 		
 		return new Vec2f(x, y);
 	}

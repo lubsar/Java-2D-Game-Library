@@ -5,4 +5,6 @@ public interface AbstractRenderer {
 	public RenderBuffer getBuffer();
 	public int getBufferWidth();
 	public int getBufferHeight();
+	
+	public void transform(float[] matrix, boolean affine);
 }

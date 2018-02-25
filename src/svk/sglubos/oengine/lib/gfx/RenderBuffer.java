@@ -1,6 +1,7 @@
 package svk.sglubos.oengine.lib.gfx;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -22,7 +23,7 @@ public class RenderBuffer {
 	protected boolean optimizedPipeline = false;
 	
 	protected BufferedImage renderLayer;
-	protected Graphics g;
+	protected Graphics2D g;
 	
 	protected List<GFXCallback> callbacks = new ArrayList<GFXCallback>();
 	

@@ -3,13 +3,13 @@ package svk.sglubos.oengine.lib.gfx;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import svk.sglubos.oengine.lib.gfx.sprite.Sprite;
 import svk.sglubos.oengine.lib.gfx.event.GFXCallback;
 import svk.sglubos.oengine.lib.gfx.event.GFXEvent;
 import svk.sglubos.oengine.lib.gfx.sprite.AbstractSpriteRenderer;
+import svk.sglubos.oengine.lib.gfx.sprite.Sprite;
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
 
@@ -28,7 +28,7 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 	protected Color clearColor;
 	protected int fontSize = -1;
 	
-	protected Graphics renderGraphics;
+	protected Graphics2D renderGraphics;
 	
 	private GFXCallback bufferCallback = (event) -> {
 		if(event == GFXEvent.BUFF_PIPE_LOCKED) {
@@ -39,6 +39,15 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 			this.optimizedPipeline = false;
 		}
 	};
+	
+	public BasicRenderer() {
+		clearColor = Color.BLACK;
+	}
+	
+	public BasicRenderer(RenderBuffer buffer) {
+		this();
+		setBuffer(buffer);
+	}
 	
 	@Override
 	public RenderBuffer getBuffer() {
@@ -69,15 +78,6 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 	@Override
 	public int getBufferHeight() {
 		return bufferHeight;
-	}
-	
-	public BasicRenderer() {
-		clearColor = Color.BLACK;
-	}
-	
-	public BasicRenderer(RenderBuffer buffer) {
-		this();
-		setBuffer(buffer);
 	}
 	
 	public void renderFilledRectangle(int x, int y, int width, int height, Color color) {
@@ -469,5 +469,11 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 		ret.appendCloseBracket();
 
 		return ret.getString();
+	}
+	
+	@Deprecated
+	@Override
+	public void transform(float[] matrix, boolean affine) {
+		throw new RuntimeException("Matrix transformation not supported");
 	}
 }
