@@ -87,8 +87,9 @@ public class Mouse extends MouseAdapter {
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(pressedButtons.containsKey(e.getButton()))
-			pressedButtons.remove(e.getButton());
+		int button = e.getButton();
+		pressedButtons.remove((Integer)button);
+		clickedButtons.remove((Integer)button);
 	}
 
 	@Override

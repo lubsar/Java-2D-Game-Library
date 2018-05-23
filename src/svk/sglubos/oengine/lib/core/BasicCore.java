@@ -1,91 +1,30 @@
 package svk.sglubos.oengine.lib.core;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
 import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
 
-public abstract class BasicCore extends Core implements Runnable {
+public abstract class BasicCore extends Core {
 	public static final int FPS_UNLIMITED = -1;
 	
-	protected Thread thread;
+	protected Timer timer;
 	
 	private boolean debug;
-	private long sleep;
-	private int ticksPerSecond;
-	private int fpsLimit;
+	private int updatesPerSecond;
 	private int fps;
 	private int ticks;
 	
-	public BasicCore(int ticksPerSecond, int fpsLimit, boolean debug) {
-		this.ticksPerSecond = ticksPerSecond;
-		this.fpsLimit = fpsLimit;
+	public BasicCore(int updatesPerSecond, boolean debug) {
+		this.updatesPerSecond = updatesPerSecond;
 		this.debug = debug;
-		
-		if(fpsLimit != FPS_UNLIMITED) {
-			this.sleep = (long) (1000 / fpsLimit);
-		}
-	}
-	
-	@Override
-	public void run() {
-		init();
-		
-		long lastTime = System.nanoTime();
-		long lastTimeDebugOutput = System.currentTimeMillis();
-		double delta = 0;
-		double nanoSecPerTick = Math.pow(10, 9) / ticksPerSecond;
-		fps = 0;
-		ticks = 0;
-		
-		while(running){
-			long now = System.nanoTime();
-			delta += (now - lastTime) /nanoSecPerTick;
-			lastTime = now;
-				
-			while(delta >= 1){
-				delta--;
-				tick();
-				
-				if (debug)
-				 ticks++;
-			}
-			
-			render();
-			
-			if (debug)
-				fps++;
-			
-			if(fpsLimit != FPS_UNLIMITED) {
-				try {
-					Thread.sleep(sleep);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-				
-			if((System.currentTimeMillis() - lastTimeDebugOutput) >= 1000){
-				if(debug) {
-					MessageHandler.printMessage(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps);
-				}
-				lastTimeDebugOutput += 1000;
-				fps = 0;
-				ticks = 0;
-			}
-		}
-		
-		stopped();	
 	}
 
-	protected void setFPSLimit(int fpsLimit) {
-		this.fpsLimit = fpsLimit;
-		this.sleep = (long) (1000 / fpsLimit);
-	}
-	
-	protected int getFPSLimit() {
-		return fpsLimit;
-	}
-	
-	protected int getTPSLimit() {
-		return ticksPerSecond;
+	protected int getUpdatesPerSecond() {
+		return updatesPerSecond;
 	}
 	
 	protected boolean isDebug() {
@@ -99,12 +38,40 @@ public abstract class BasicCore extends Core implements Runnable {
 	@Override
 	protected void start() {
 		running = true;
-		thread = new Thread(this,"core");
-		thread.start();
+		init();
+		
+		timer = new Timer(50, new ActionListener() {
+			long lastTimeDebugOutput = System.currentTimeMillis();
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tick();
+				ticks++;
+				
+				if((System.currentTimeMillis() - lastTimeDebugOutput) >= 1000){
+					if(debug) {
+						MessageHandler.printMessage(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps);
+					}
+					
+					lastTimeDebugOutput += 1000;
+					fps = 0;
+					ticks = 0;
+				}
+				
+				render();
+				fps++;
+			}
+	
+		});
+		
+		timer.setRepeats(true);
+		timer.start();
 	}
 	
 	@Override
 	protected void stop() {
+	 timer.stop();
+	 stopped();
 	 running = false;
 	}
 	
@@ -125,11 +92,10 @@ public abstract class BasicCore extends Core implements Runnable {
 		ret.increaseLayer();
 		ret.appendln(super.toString());
 		ret.append("debug", debug);
-		ret.append("sleep", sleep);
-		ret.append("ticksPerSecond", ticksPerSecond);
-		ret.append("fpsLimit", fpsLimit);
+		ret.append("updatesPerSecond", updatesPerSecond);
 		ret.append("tps", ticks);
 		ret.append("fps", fps);
+		ret.append(timer, "Timer");
 		ret.decreaseLayer();
 		ret.appendCloseBracket();
 		

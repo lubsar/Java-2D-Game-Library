@@ -68,9 +68,7 @@ public class GameWindow extends JFrame {
 			@Override
 			public void componentHidden(ComponentEvent e) {}
 		});
-		setVisible(true);
 		
-		canvas.init(2);
 		this.device = graphicsDevice;
 	}
 	
@@ -111,7 +109,6 @@ public class GameWindow extends JFrame {
 		setUndecorated(!decorated);
 		pack();
 		setVisible(true);
-		canvas.init(2);
 	}
 	
 	protected void simulateFullScreen(boolean fullScreen) {
