@@ -14,17 +14,17 @@ public abstract class BasicCore extends Core {
 	protected Timer timer;
 	
 	private boolean debug;
-	private int updatesPerSecond;
+	private int updatesDelay;
 	private int fps;
 	private int ticks;
 	
-	public BasicCore(int updatesPerSecond, boolean debug) {
-		this.updatesPerSecond = updatesPerSecond;
+	public BasicCore(int updatesDelay, boolean debug) {
+		this.updatesDelay = updatesDelay;
 		this.debug = debug;
 	}
 
-	protected int getUpdatesPerSecond() {
-		return updatesPerSecond;
+	protected int getUpdatesDelayMs() {
+		return updatesDelay;
 	}
 	
 	protected boolean isDebug() {
@@ -40,17 +40,23 @@ public abstract class BasicCore extends Core {
 		running = true;
 		init();
 		
-		timer = new Timer(50, new ActionListener() {
+		timer = new Timer(updatesDelay, new ActionListener() {
+			long lastTimeNano = System.nanoTime();
 			long lastTimeDebugOutput = System.currentTimeMillis();
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tick();
+				long now = System.nanoTime();
+				tick((now - lastTimeNano) / (updatesDelay * 1000000));
+				
 				ticks++;
+				
+				render();
+				fps++;
 				
 				if((System.currentTimeMillis() - lastTimeDebugOutput) >= 1000){
 					if(debug) {
-						MessageHandler.printMessage(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps);
+						MessageHandler.printMessage(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps + "delta: " + ((double)(now - lastTimeNano) / (updatesDelay * 1000000)));
 					}
 					
 					lastTimeDebugOutput += 1000;
@@ -58,8 +64,7 @@ public abstract class BasicCore extends Core {
 					ticks = 0;
 				}
 				
-				render();
-				fps++;
+				lastTimeNano = now;
 			}
 	
 		});
@@ -92,7 +97,7 @@ public abstract class BasicCore extends Core {
 		ret.increaseLayer();
 		ret.appendln(super.toString());
 		ret.append("debug", debug);
-		ret.append("updatesPerSecond", updatesPerSecond);
+		ret.append("updatesDelayMs", updatesDelay);
 		ret.append("tps", ticks);
 		ret.append("fps", fps);
 		ret.append(timer, "Timer");

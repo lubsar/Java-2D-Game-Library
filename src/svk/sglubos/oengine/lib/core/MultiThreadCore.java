@@ -123,7 +123,7 @@ public abstract class MultiThreadCore extends Core {
 					
 				while(delta >= 1){
 					delta--;
-					tick();
+					tick(1.0);
 					
 					if (debug)
 					 ticks++;

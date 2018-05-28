@@ -8,7 +8,7 @@ public abstract class Core {
 	protected abstract void start();
 	protected abstract void stop();
 	protected abstract void init();
-	protected abstract void tick();
+	protected abstract void tick(double delta);
 	protected abstract void render();
 	protected abstract void stopped();
 	protected abstract int getFPS();
