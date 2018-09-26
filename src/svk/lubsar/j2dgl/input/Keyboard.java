@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.input;
+package svk.lubsar.j2dgl.input;
 
 import java.awt.Component;
 import java.awt.event.KeyAdapter;
@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
-import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.MessageHandler;
 
 public class Keyboard extends KeyAdapter {
 	private static final Keyboard INSTANCE = new Keyboard();

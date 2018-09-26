@@ -1,7 +1,7 @@
-package svk.sglubos.oengine.lib.core;
+package svk.lubsar.j2dgl.core;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
-import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.MessageHandler;
 
 public abstract class MultiThreadCore extends Core {
 	public static final int FPS_UNLIMITED = -1;
@@ -60,6 +60,9 @@ public abstract class MultiThreadCore extends Core {
 
 	@Override
 	protected void stop() {
+		 if(!running) {
+			 throw new RuntimeException("Game loop is not running");
+		 }
 		running = false;
 	}
 	

@@ -1,9 +1,9 @@
-package svk.sglubos.oengine.lib.gfx.animation;
+package svk.lubsar.j2dgl.gfx.animation;
 
 import java.awt.image.BufferedImage;
 
-import svk.sglubos.oengine.lib.gfx.AbstractPrimitiveRenderer;
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.gfx.AbstractPrimitiveRenderer;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 //TODO Documentation
 public class BufferedImageAnimation extends Animation<AbstractPrimitiveRenderer> {

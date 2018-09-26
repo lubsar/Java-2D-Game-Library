@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.io;
+package svk.lubsar.j2dgl.fileio;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
+import svk.lubsar.j2dgl.utils.debug.MessageHandler;
 
 public class ImagePort {
 	public static BufferedImage getImageAsResource(String path) {

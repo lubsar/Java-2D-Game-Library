@@ -1,6 +1,6 @@
-package svk.sglubos.oengine.lib.gfx.sprite;
+package svk.lubsar.j2dgl.gfx.sprite;
 
-import svk.sglubos.oengine.lib.gfx.AbstractRenderer;
+import svk.lubsar.j2dgl.gfx.AbstractRenderer;
 
 public interface AbstractSpriteRenderer extends AbstractRenderer {
 	public void render(Sprite sprite, int xCoord, int yCoord);

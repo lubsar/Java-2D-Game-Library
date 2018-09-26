@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.gfx;
+package svk.lubsar.j2dgl.gfx;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,10 +8,10 @@ import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
 import java.util.List;
 
-import svk.sglubos.oengine.lib.gfx.event.GFXCallback;
-import svk.sglubos.oengine.lib.gfx.event.GFXEvent;
-import svk.sglubos.oengine.lib.gfx.utils.ImageOptimizer;
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.gfx.event.GFXCallback;
+import svk.lubsar.j2dgl.gfx.event.GFXEvent;
+import svk.lubsar.j2dgl.gfx.utils.ImageOptimizer;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 public class RenderBuffer {
 	public static final byte PIPELINE_LOCKED_TAG = 0x0;

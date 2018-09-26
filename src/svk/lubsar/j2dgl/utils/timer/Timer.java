@@ -1,10 +1,10 @@
-package svk.sglubos.oengine.lib.utils.timer;
+package svk.lubsar.j2dgl.utils.timer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
+import svk.lubsar.j2dgl.utils.debug.MessageHandler;
 //TODO toString
 public class Timer {
 	public static final byte TIME_FORMAT_MILLISECONDS = 1;

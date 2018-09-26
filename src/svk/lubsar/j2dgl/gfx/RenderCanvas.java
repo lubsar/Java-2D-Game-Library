@@ -1,13 +1,13 @@
-package svk.sglubos.oengine.lib.gfx;
+package svk.lubsar.j2dgl.gfx;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import svk.sglubos.oengine.lib.gfx.event.GFXCallback;
-import svk.sglubos.oengine.lib.gfx.event.GFXEvent;
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.gfx.event.GFXCallback;
+import svk.lubsar.j2dgl.gfx.event.GFXEvent;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 @SuppressWarnings("serial")
 public class RenderCanvas extends JPanel {

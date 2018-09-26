@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.io;
+package svk.lubsar.j2dgl.fileio;
 
 import java.io.File;
 import java.net.URI;

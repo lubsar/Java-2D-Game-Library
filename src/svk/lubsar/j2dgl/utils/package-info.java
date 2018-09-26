@@ -1,2 +1,2 @@
 
-package svk.sglubos.oengine.lib.utils;
+package svk.lubsar.j2dgl.utils;

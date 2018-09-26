@@ -1,8 +1,8 @@
-package svk.sglubos.oengine.lib.utils.debug;
+package svk.lubsar.j2dgl.utils.debug;
 
 import java.io.PrintStream;
 
-import svk.sglubos.oengine.lib.utils.log.Log;
+import svk.lubsar.j2dgl.utils.log.Log;
 
 public class MessageHandler {
 	public static final String WARNING = "WARNING";

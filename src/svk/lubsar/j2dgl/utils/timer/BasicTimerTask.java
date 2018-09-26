@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.utils.timer;
+package svk.lubsar.j2dgl.utils.timer;
 //TODO toString
 public class BasicTimerTask extends TimerTask {
 	public BasicTimerTask(byte timeFormat, double delay, TimerCallback callback) {

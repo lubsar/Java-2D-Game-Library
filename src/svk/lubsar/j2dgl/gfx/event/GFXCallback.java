@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.gfx.event;
+package svk.lubsar.j2dgl.gfx.event;
 
 @FunctionalInterface
 public interface GFXCallback {

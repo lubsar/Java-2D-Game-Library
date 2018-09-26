@@ -1,12 +1,8 @@
-package svk.sglubos.oengine.gfx;
+package svk.lubsar.j2dgl.gfx;
 
 import java.awt.GraphicsDevice;
 import java.util.HashMap;
 import java.util.Map;
-
-import svk.sglubos.oengine.lib.gfx.AbstractRenderer;
-import svk.sglubos.oengine.lib.gfx.GameWindow;
-import svk.sglubos.oengine.lib.gfx.RenderBuffer;
 
 public class EngineGraphicsEnvironment {
 	private GraphicsDevice device;

@@ -1,10 +1,10 @@
-package svk.sglubos.oengine.lib.utils.debug;
+package svk.lubsar.j2dgl.utils.debug;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-import svk.sglubos.oengine.lib.utils.Constants;
+import svk.lubsar.j2dgl.utils.Constants;
 
 //TODO build fancy string formatter
 public class DebugStringBuilder implements Constants {

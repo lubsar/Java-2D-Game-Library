@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.gfx.utils;
+package svk.lubsar.j2dgl.gfx.utils;
 
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;

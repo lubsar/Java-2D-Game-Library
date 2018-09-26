@@ -1,2 +1,2 @@
 
-package svk.sglubos.oengine.lib.gfx.utils;
+package svk.lubsar.j2dgl.gfx.utils;

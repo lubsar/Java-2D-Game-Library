@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.math;
+package svk.lubsar.j2dgl.math;
 
 public class Mat2f {
 	public float[] mat = new float[4];

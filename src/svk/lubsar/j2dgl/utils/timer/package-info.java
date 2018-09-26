@@ -1,2 +1,2 @@
-package svk.sglubos.oengine.lib.utils.timer;
+package svk.lubsar.j2dgl.utils.timer;
 

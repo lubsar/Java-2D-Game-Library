@@ -1,9 +1,9 @@
-package svk.sglubos.oengine.lib.gfx.sprite;
+package svk.lubsar.j2dgl.gfx.sprite;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 public class SpriteSheet {
 	private int width;

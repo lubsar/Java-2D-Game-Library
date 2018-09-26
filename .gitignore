@@ -1,3 +1,6 @@
 \bin
-\src\svk\sglubos\oengine\test
 ToDo.txt
+sglubos/
+.classpath
+.project
+.gitignore

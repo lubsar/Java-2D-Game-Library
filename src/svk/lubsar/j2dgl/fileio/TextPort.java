@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.io;
+package svk.lubsar.j2dgl.fileio;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,7 +11,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import svk.sglubos.oengine.lib.utils.Constants;
+import svk.lubsar.j2dgl.utils.Constants;
 //TODO document, exceptions, saving, refactor (remove methods / reduce code duplication)
 public class TextPort {
 	public static String loadTextAsString(String path) {

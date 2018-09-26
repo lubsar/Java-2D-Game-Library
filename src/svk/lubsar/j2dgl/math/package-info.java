@@ -1,2 +1,2 @@
 
-package svk.sglubos.oengine.lib.math;
+package svk.lubsar.j2dgl.math;

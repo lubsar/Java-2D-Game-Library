@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.utils.log;
+package svk.lubsar.j2dgl.utils.log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 public abstract class Log extends PrintStream {
 	String id;

@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.gfx;
+package svk.lubsar.j2dgl.gfx;
 
 import java.awt.BorderLayout;
 import java.awt.DisplayMode;
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 
 @SuppressWarnings("serial")

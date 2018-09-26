@@ -1,9 +1,9 @@
-package svk.sglubos.oengine.lib.gfx.animation;
+package svk.lubsar.j2dgl.gfx.animation;
 
-import svk.sglubos.oengine.lib.gfx.sprite.AbstractSpriteRenderer;
-import svk.sglubos.oengine.lib.gfx.sprite.Sprite;
-import svk.sglubos.oengine.lib.gfx.sprite.SpriteSheet;
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.gfx.sprite.AbstractSpriteRenderer;
+import svk.lubsar.j2dgl.gfx.sprite.Sprite;
+import svk.lubsar.j2dgl.gfx.sprite.SpriteSheet;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 public class SpriteAnimation extends Animation<AbstractSpriteRenderer> {
 	protected Sprite[] sprites;

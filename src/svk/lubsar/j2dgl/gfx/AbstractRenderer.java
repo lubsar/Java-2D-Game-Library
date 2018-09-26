@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.gfx;
+package svk.lubsar.j2dgl.gfx;
 
 public interface AbstractRenderer {
 	public void setBuffer(RenderBuffer buffer);
@@ -6,5 +6,6 @@ public interface AbstractRenderer {
 	public int getBufferWidth();
 	public int getBufferHeight();
 	
-	public void transform(float[] matrix, boolean affine);
+	public void setTransform(float[] matrix, boolean affine);
+	public float[] getTransform();
 }

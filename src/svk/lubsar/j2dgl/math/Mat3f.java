@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.math;
+package svk.lubsar.j2dgl.math;
 
 public class Mat3f {
 	public float[] mat = new float[9];
@@ -35,17 +35,33 @@ public class Mat3f {
 		mat[8] = i;
 	}
 	
+	public void set(float a, float b, float c,
+				 float d, float e, float f,
+				 float g, float h, float i) {
+		mat[0] = a;
+		mat[1] = b;
+		mat[2] = c;
+		
+		mat[3] = d;
+		mat[4] = e;
+		mat[5] = f;
+		
+		mat[6] = g;
+		mat[7] = h;
+		mat[8] = i;
+	}
+	
 	public void multiply(Mat3f mat) {
 		float a = this.mat[0] * mat.mat[0] + this.mat[1] * mat.mat[3] + this.mat[2] * mat.mat[6];
 		float b = this.mat[0] * mat.mat[1] + this.mat[1] * mat.mat[4] + this.mat[2] * mat.mat[7];
 		float c = this.mat[0] * mat.mat[2] + this.mat[1] * mat.mat[5] + this.mat[2] * mat.mat[8];
 		
 		float d = this.mat[3] * mat.mat[0] + this.mat[4] * mat.mat[3] + this.mat[5] * mat.mat[6];
-		float e = this.mat[3] * mat.mat[1] + this.mat[4] * mat.mat[3] + this.mat[5] * mat.mat[7];
+		float e = this.mat[3] * mat.mat[1] + this.mat[4] * mat.mat[4] + this.mat[5] * mat.mat[7];
 		float f = this.mat[3] * mat.mat[2] + this.mat[4] * mat.mat[5] + this.mat[5] * mat.mat[8];
 		
 		float g = this.mat[6] * mat.mat[0] + this.mat[7] * mat.mat[3] + this.mat[8] * mat.mat[6];
-		float h = this.mat[6] * mat.mat[1] + this.mat[7] * mat.mat[3] + this.mat[8] * mat.mat[7];
+		float h = this.mat[6] * mat.mat[1] + this.mat[7] * mat.mat[4] + this.mat[8] * mat.mat[7];
 		float i = this.mat[6] * mat.mat[2] + this.mat[7] * mat.mat[5] + this.mat[8] * mat.mat[8];
 
 		
@@ -62,7 +78,7 @@ public class Mat3f {
 		this.mat[8] = i;
 	}
 	
-	public void add(Mat2f mat) {
+	public void add(Mat3f mat) {
 		this.mat[0] += mat.mat[0];
 		this.mat[1] += mat.mat[1];
 		this.mat[2] += mat.mat[2];
@@ -76,7 +92,7 @@ public class Mat3f {
 		this.mat[8] += mat.mat[8];
 	}
 	
-	public void subtract(Mat2f mat) {
+	public void subtract(Mat3f mat) {
 		this.mat[0] -= mat.mat[0];
 		this.mat[1] -= mat.mat[1];
 		this.mat[2] -= mat.mat[2];
@@ -104,7 +120,7 @@ public class Mat3f {
 		this.mat[8] *= scale;
 	}
 	
-	public void identity() {
+	public void setToIdentity() {
 		this.mat[0] = 1.0f;
 		this.mat[1] = 0.0f;
 		this.mat[2] = 0.0f;
@@ -116,6 +132,17 @@ public class Mat3f {
 		this.mat[6] = 0.0f;
 		this.mat[7] = 0.0f;
 		this.mat[8] = 1.0f;
+	}
+	
+	public void setToRotation(float angleDeg, boolean clockwise) {
+		double angle = Math.toRadians(angleDeg);
+		
+		float sin = (float) Math.sin(angle);
+		float cos = (float) Math.cos(angle);
+		
+		set(cos, clockwise ? -sin: sin, 0.0f, 
+				         clockwise ? sin : -sin, cos, 0.0f,
+				         0.0f, 0.0f, 1.0f);
 	}
 	
 	public static Mat3f add(Mat3f mat1, Mat3f mat2) {
@@ -142,11 +169,11 @@ public class Mat3f {
 		float c = mat1.mat[0] * mat2.mat[2] + mat1.mat[1] * mat2.mat[5] + mat1.mat[2] * mat2.mat[8];
 		
 		float d = mat1.mat[3] * mat2.mat[0] + mat1.mat[4] * mat2.mat[3] + mat1.mat[5] * mat2.mat[6];
-		float e = mat1.mat[3] * mat2.mat[1] + mat1.mat[4] * mat2.mat[3] + mat1.mat[5] * mat2.mat[7];
+		float e = mat1.mat[3] * mat2.mat[1] + mat1.mat[4] * mat2.mat[4] + mat1.mat[5] * mat2.mat[7];
 		float f = mat1.mat[3] * mat2.mat[2] + mat1.mat[4] * mat2.mat[5] + mat1.mat[5] * mat2.mat[8];
 		
 		float g = mat1.mat[6] * mat2.mat[0] + mat1.mat[7] * mat2.mat[3] + mat1.mat[8] * mat2.mat[6];
-		float h = mat1.mat[6] * mat2.mat[1] + mat1.mat[7] * mat2.mat[3] + mat1.mat[8] * mat2.mat[7];
+		float h = mat1.mat[6] * mat2.mat[1] + mat1.mat[7] * mat2.mat[4] + mat1.mat[8] * mat2.mat[7];
 		float i = mat1.mat[6] * mat2.mat[2] + mat1.mat[7] * mat2.mat[5] + mat1.mat[8] * mat2.mat[8];
 
 		
@@ -165,8 +192,8 @@ public class Mat3f {
 		float sin = (float) Math.sin(angle);
 		float cos = (float) Math.cos(angle);
 		
-		return new Mat3f(cos, clockwise ? sin: - sin, 0.0f, 
-				         clockwise ? -sin : sin, cos, 0.0f,
+		return new Mat3f(cos, clockwise ? -sin: sin, 0.0f, 
+				         clockwise ? sin : -sin, cos, 0.0f,
 				         0.0f, 0.0f, 1.0f);
 	}
 	
@@ -174,5 +201,10 @@ public class Mat3f {
 		return new Mat3f(xscale, 0.0f, 0.0f,
 				         0.0f, yscale, 0.0f,
 				         0.0f, 0.0f, 1.0f);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("[%.2f %.2f %.2f]\n[%.2f %.2f %.2f]\n[%.2f, %.2f, %.2f]", mat[0], mat[1], mat[2], mat[3], mat[4], mat[5], mat[6], mat[7], mat[8]);
 	}
 }

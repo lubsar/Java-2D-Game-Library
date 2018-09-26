@@ -1,6 +1,6 @@
-package svk.sglubos.oengine.lib.gfx.sprite;
+package svk.lubsar.j2dgl.gfx.sprite;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 public class Sprite {
 	protected int width;

@@ -1,17 +1,18 @@
-package svk.sglubos.oengine.lib.gfx;
+package svk.lubsar.j2dgl.gfx;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-import svk.sglubos.oengine.lib.gfx.event.GFXCallback;
-import svk.sglubos.oengine.lib.gfx.event.GFXEvent;
-import svk.sglubos.oengine.lib.gfx.sprite.AbstractSpriteRenderer;
-import svk.sglubos.oengine.lib.gfx.sprite.Sprite;
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
-import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
+import svk.lubsar.j2dgl.gfx.event.GFXCallback;
+import svk.lubsar.j2dgl.gfx.event.GFXEvent;
+import svk.lubsar.j2dgl.gfx.sprite.AbstractSpriteRenderer;
+import svk.lubsar.j2dgl.gfx.sprite.Sprite;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.MessageHandler;
 
 public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveRenderer {
 	protected RenderBuffer buffer = null;
@@ -24,7 +25,9 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 	protected int xOffset = 0;
 	protected int yOffset = 0;
 	protected boolean ignoreOffset;
-
+	
+	protected float[] transformMatrix;
+	
 	protected Color clearColor;
 	protected int fontSize = -1;
 	
@@ -471,9 +474,29 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 		return ret.getString();
 	}
 	
-	@Deprecated
 	@Override
-	public void transform(float[] matrix, boolean affine) {
-		throw new RuntimeException("Matrix transformation not supported");
+	public void setTransform(float[] matrix, boolean affine) {
+		AffineTransform transformObject = null;
+		if(affine && matrix.length < 6) {
+			throw new RuntimeException("Matrix is too short to be used as an affine transform");
+		}
+		
+		if(affine) {
+			 transformObject = new AffineTransform(matrix[0], matrix[3], matrix[1], matrix[4], matrix[2], matrix[5]);
+		} else {
+			transformObject = new AffineTransform(matrix);
+		}
+		renderGraphics.setTransform(transformObject);
+		
+		this.transformMatrix = matrix;
+	}
+	
+	@Override
+	public float[] getTransform() {
+		return transformMatrix;
+	}
+	
+	public Graphics2D getRenderGraphics() {
+		return renderGraphics;
 	}
 }

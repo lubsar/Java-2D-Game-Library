@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.utils.timer;
+package svk.lubsar.j2dgl.utils.timer;
 
 public class LoopTimerTask extends TimerTask {
 	public static final int INFINITE = -1;

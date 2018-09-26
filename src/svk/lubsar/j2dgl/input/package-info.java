@@ -1,2 +1,2 @@
 
-package svk.sglubos.oengine.lib.input;
+package svk.lubsar.j2dgl.input;

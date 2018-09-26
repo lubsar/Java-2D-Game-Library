@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.utils.log.basic;
+package svk.lubsar.j2dgl.utils.log.basic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,9 +7,9 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
-import svk.sglubos.oengine.lib.utils.log.Log;
-import svk.sglubos.oengine.lib.utils.log.LoggingUtilities;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.log.Log;
+import svk.lubsar.j2dgl.utils.log.LoggingUtilities;
 
 public class BasicLog extends Log {
 	private boolean timeStamps;

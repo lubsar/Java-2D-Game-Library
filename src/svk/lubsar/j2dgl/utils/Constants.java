@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.utils;
+package svk.lubsar.j2dgl.utils;
 
 public interface Constants {
 	public static final String TABULATOR = "\t";

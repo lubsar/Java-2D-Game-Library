@@ -1,4 +1,4 @@
-package svk.sglubos.oengine.lib.gfx;
+package svk.lubsar.j2dgl.gfx;
 
 import java.awt.Color;
 import java.awt.Font;

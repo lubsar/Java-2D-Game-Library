@@ -1,8 +1,8 @@
-package svk.sglubos.oengine.lib.gfx.animation;
+package svk.lubsar.j2dgl.gfx.animation;
 
-import svk.sglubos.oengine.lib.gfx.AbstractRenderer;
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
-import svk.sglubos.oengine.lib.utils.debug.MessageHandler;
+import svk.lubsar.j2dgl.gfx.AbstractRenderer;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.MessageHandler;
 
 public abstract class Animation<T extends AbstractRenderer> {
 	protected int frameDelayTicks;

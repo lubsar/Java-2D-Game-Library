@@ -1,2 +1,2 @@
 
-package svk.sglubos.oengine.lib.gfx.sprite;
+package svk.lubsar.j2dgl.gfx.sprite;

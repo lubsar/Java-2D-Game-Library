@@ -1,10 +1,10 @@
-package svk.sglubos.oengine.lib.utils.log;
+package svk.lubsar.j2dgl.utils.log;
 
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import svk.sglubos.oengine.lib.utils.debug.DebugStringBuilder;
+import svk.lubsar.j2dgl.utils.debug.DebugStringBuilder;
 
 public class Logger {
 	private static final Map<String, PrintStream> globalLogs = new HashMap<String, PrintStream>();
