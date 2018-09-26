@@ -19,6 +19,7 @@ import svk.lubsar.j2dgl.utils.debug.MessageHandler;
  * Debug information is passed to {@link svk.lubsar.j2dgl.utils.debug.MessageHandler MessageHandler}.
  * 
  * @see Core
+ * @see MultiThreadCore
  */
 public abstract class BasicCore extends Core {
 	/**
