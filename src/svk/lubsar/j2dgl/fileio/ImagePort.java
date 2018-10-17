@@ -14,9 +14,10 @@ public class ImagePort {
 		try {
 			image = ImageIO.read(ImagePort.class.getResource(path));
 		} catch (IOException e) {
-			MessageHandler.printMessage("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image as resource:" + path);
+			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image as resource:" + path);
 			e.printStackTrace();
 		}
+		
 		return image;
 	}
 	
@@ -25,7 +26,7 @@ public class ImagePort {
 		try{
 			image = ImageIO.read(new File(path));			
 		}catch (IOException e){
-			MessageHandler.printMessage("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image:" + path);
+			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image:" + path);
 			e.printStackTrace();
 		}
 		return image;
@@ -36,7 +37,7 @@ public class ImagePort {
 		try{
 			image = ImageIO.read(file);			
 		}catch (IOException e){
-			MessageHandler.printMessage("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image:" + file);
+			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image:" + file);
 			e.printStackTrace();
 		}
 		return image;
@@ -44,18 +45,17 @@ public class ImagePort {
 	
 	public static void exportImage(BufferedImage image, String path, String name, String format) {
 		if(path.endsWith("/")) {
-			path += name + "." + format;
+			path = String.format("%s%s.%s", path, name, format);
 		} else if(!path.isEmpty()) {
-			path += "/" + name + "." + format;
+			path = String.format("%s/%s.%s", path, name, format);
 		} else {
-			path += name + "." + format;
+			path = String.format("%s%s.%s", path, name, format);
 		}
 		
 		try {
-			ImageIO.write(image,format , new File(path));
-			System.out.println(new File(path).getAbsolutePath());
+			ImageIO.write(image, format, new File(path));
 		} catch (Exception e) {
-			MessageHandler.printMessage("IMAGE_PORT", MessageHandler.ERROR, "Exception occured when writing image " + image +" to: " + path);
+			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "Exception occured when writing image " + image +" to: " + path);
 			e.printStackTrace();
 		}
 	}

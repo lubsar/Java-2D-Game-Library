@@ -26,11 +26,11 @@ public class SpriteAnimation extends Animation<AbstractSpriteRenderer> {
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 		
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
 		ret.appendln(super.toString());
 		ret.append(sprites, "sprites");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

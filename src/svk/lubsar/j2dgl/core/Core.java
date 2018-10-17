@@ -86,10 +86,10 @@ public abstract class Core {
 	@Override
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
-		ret.append("running", running);
-		ret.decreaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
+		ret.appendPrimitive("running", running);
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.toString();

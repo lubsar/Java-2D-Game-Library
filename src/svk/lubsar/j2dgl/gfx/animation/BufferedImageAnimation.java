@@ -17,11 +17,11 @@ public class BufferedImageAnimation extends Animation<AbstractPrimitiveRenderer>
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 		
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
 		ret.appendln(super.toString());
 		ret.append(images, "images");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

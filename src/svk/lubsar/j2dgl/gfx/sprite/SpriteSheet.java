@@ -68,13 +68,13 @@ public class SpriteSheet {
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 		
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
-		ret.append("width", width);
-		ret.append("height", height);
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
+		ret.appendPrimitive("width", width);
+		ret.appendPrimitive("height", height);
 		ret.append(image, "image");
 		ret.append(sprites, "sprites");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

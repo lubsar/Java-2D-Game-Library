@@ -46,7 +46,7 @@ public abstract class Animation<T extends AbstractRenderer> {
 
 	public void start(boolean loop) {
 		if (running) {
-			MessageHandler.printMessage("ANIMATION", MessageHandler.WARNING, "Animation is still running !");
+			MessageHandler.print("ANIMATION", MessageHandler.WARNING, "Animation is still running !");
 			return;
 		}
 
@@ -63,7 +63,7 @@ public abstract class Animation<T extends AbstractRenderer> {
 
 	public void startReverse(boolean loop) {
 		if (running) {
-			MessageHandler.printMessage("ANIMATION", MessageHandler.WARNING, "Animation is still running !");
+			MessageHandler.print("ANIMATION", MessageHandler.WARNING, "Animation is still running !");
 			return;
 		}
 
@@ -107,7 +107,7 @@ public abstract class Animation<T extends AbstractRenderer> {
 	protected void initStartAndEnd(int startFrame, int endFrame) {
 		if (startFrame > endFrame || startFrame < 0 || endFrame < 0 || startFrame > frames - 1
 				|| endFrame > frames - 1) {
-			MessageHandler.printMessage("ANIMATION", MessageHandler.ERROR,
+			MessageHandler.print("ANIMATION", MessageHandler.ERROR,
 					"Invalind animation starting or ending frame. Starting frame can not be higher than end frame: start:"
 							+ startFrame + " end: " + endFrame);
 			throw new IllegalArgumentException(
@@ -120,7 +120,7 @@ public abstract class Animation<T extends AbstractRenderer> {
 
 	public void setFrameDelay(int frameDelay) {
 		if (frameDelay < 0) {
-			MessageHandler.printMessage("ANIMATION", MessageHandler.ERROR,
+			MessageHandler.print("ANIMATION", MessageHandler.ERROR,
 					"Invalind animation frame delay, delay can not be less than zero " + frameDelay);
 			throw new IllegalArgumentException("Frame delay can not be less than 0: " + frameDelay);
 		}
@@ -133,7 +133,7 @@ public abstract class Animation<T extends AbstractRenderer> {
 
 	public void setStartFrame(int startFrame) {
 		if (startFrame < 0 || startFrame >= frames || startFrame > endFrame) {
-			MessageHandler.printMessage("ANIMATION", MessageHandler.ERROR,
+			MessageHandler.print("ANIMATION", MessageHandler.ERROR,
 					"Illegal starting frame, frame cannot be less than zero and more than frames -1: " + startFrame);
 			throw new IllegalArgumentException("Illegal starting frame: " + startFrame);
 		}
@@ -143,7 +143,7 @@ public abstract class Animation<T extends AbstractRenderer> {
 
 	public void setEndFrame(int endFrame) {
 		if (endFrame < 0 || endFrame >= frames || endFrame < startFrame) {
-			MessageHandler.printMessage("ANIMATION", MessageHandler.ERROR,
+			MessageHandler.print("ANIMATION", MessageHandler.ERROR,
 					"Illegal ending frame, frame cannot be less than zero and more than frames -1: " + endFrame);
 			throw new IllegalArgumentException("Illegal ending frame: " + endFrame);
 		}
@@ -162,19 +162,19 @@ public abstract class Animation<T extends AbstractRenderer> {
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
-		ret.append("frameDelay", frameDelayTicks);
-		ret.append("ticksToSwitch", ticksToSwitch);
-		ret.append("frames", frames);
-		ret.append("loop", loop);
-		ret.append("running", running);
-		ret.append("reverse", reverse);
-		ret.append("currentFrame", currentFrame);
-		ret.append("startFrame", startFrame);
-		ret.append("endFrame", endFrame);
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
+		ret.appendPrimitive("frameDelay", frameDelayTicks);
+		ret.appendPrimitive("ticksToSwitch", ticksToSwitch);
+		ret.appendPrimitive("frames", frames);
+		ret.appendPrimitive("loop", loop);
+		ret.appendPrimitive("running", running);
+		ret.appendPrimitive("reverse", reverse);
+		ret.appendPrimitive("currentFrame", currentFrame);
+		ret.appendPrimitive("startFrame", startFrame);
+		ret.appendPrimitive("endFrame", endFrame);
 
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 
 		return ret.getString();

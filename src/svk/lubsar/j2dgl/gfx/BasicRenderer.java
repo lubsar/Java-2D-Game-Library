@@ -398,7 +398,7 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 
 	public void setColor(Color color) {
 		if (color == null) {
-			MessageHandler.printMessage(MessageHandler.ERROR, "Screen color cannot be set to null");
+			MessageHandler.print(MessageHandler.ERROR, "Screen color cannot be set to null");
 			return;
 		}
 
@@ -407,7 +407,7 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 
 	public void setFont(Font font) {
 		if (font == null) {
-			MessageHandler.printMessage(MessageHandler.ERROR,
+			MessageHandler.print(MessageHandler.ERROR,
 					"Screen font cannot be set to null, font stays set to current font");
 			return;
 		}
@@ -456,19 +456,19 @@ public class BasicRenderer implements AbstractSpriteRenderer, AbstractPrimitiveR
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
-		ret.append("bufferWidth", bufferWidth);
-		ret.append("bufferHeight", bufferHeight);
-		ret.append("ignoreOffset", ignoreOffset);
-		ret.append("xOffset", xOffset);
-		ret.append("yOffset", yOffset);
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
+		ret.appendPrimitive("bufferWidth", bufferWidth);
+		ret.appendPrimitive("bufferHeight", bufferHeight);
+		ret.appendPrimitive("ignoreOffset", ignoreOffset);
+		ret.appendPrimitive("xOffset", xOffset);
+		ret.appendPrimitive("yOffset", yOffset);
 
 		ret.append(clearColor, "clearColor");
 		ret.append(renderGraphics, "renderGraphics");
 		ret.append(buffer, "renderBuffer");
 		ret.append(bufferPixels, "bufferPixels");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 
 		return ret.getString();

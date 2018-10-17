@@ -11,7 +11,7 @@ public class DebugStringBuilder implements Constants {
 	public static final int STATIC_CONTENT = -1;
 	
 	private StringBuilder builder = new StringBuilder();
-	public int layer;
+	public int offset;
 	
 	public void append(String string) {
 		if(!string.contains("\r") && !string.contains("\n") && !string.contains(LINE_SEPARATOR)) {
@@ -40,7 +40,7 @@ public class DebugStringBuilder implements Constants {
 		}
 	}
 	
-	public void append(Class<?> clas, int hashcode) {
+	public void appendInstanceInfo(Class<?> clas, int hashcode) {
 		appendTabs();
 		builder.append(clas.getName());
 		builder.append("@");
@@ -65,13 +65,13 @@ public class DebugStringBuilder implements Constants {
 		builder.append(" = [");
 		builder.append(LINE_SEPARATOR);
 		if(object == null) {
-			layer++;
+			offset++;
 			appendln("null");
-			layer--;
+			offset--;
 		} else {
-			layer++;
+			offset++;
 			appendln(object.toString());
-			layer--;
+			offset--;
 		}
 		
 		appendln("]");
@@ -89,7 +89,7 @@ public class DebugStringBuilder implements Constants {
 		builder.append(name);
 		builder.append(" = [" + LINE_SEPARATOR);
 		if(objects != null) {
-			increaseLayer();
+			increaseOffset();
 			for(int i = 0; i < objects.length; i++) {
 				if(objects[i] == null) {
 					appendln("null");
@@ -97,13 +97,13 @@ public class DebugStringBuilder implements Constants {
 					appendln(objects[i].toString());
 				}
 			}
-			decreaseLayer();
+			decreaseOffset();
 		}
 		
 		appendln("]");
 	}
 	
-	public void append(String name, Object primitive) {
+	public void appendPrimitive(String name, Object primitive) {
 		append(name);
 		builder.append(" = ");
 		if(primitive == null) {
@@ -115,7 +115,7 @@ public class DebugStringBuilder implements Constants {
 		builder.append(LINE_SEPARATOR);
 	}
 	
-	public void append(String name, Object[] primitives) {
+	public void appendPrimitive(String name, Object[] primitives) {
 		append(name);
 		builder.append(" = [");
 		  for(int i = 0; i < primitives.length; i++) {
@@ -136,7 +136,7 @@ public class DebugStringBuilder implements Constants {
 		builder.append(LINE_SEPARATOR);
 	}
 	
-	public void append (Iterator<Object> iter, String name) {
+	public void append(Iterator<Object> iter, String name) {
 		append(name);
 		builder.append('<');
 		builder.append(iter.getClass());
@@ -216,25 +216,25 @@ public class DebugStringBuilder implements Constants {
 	}
 	
 	private void appendTabs() {
-		if(layer == 0) {
+		if(offset == 0) {
 			return;
 		}
 		
-		for(int i = 0; i < layer; i++) {
+		for(int i = 0; i < offset; i++) {
 			builder.append(TABULATOR);
 		}
 	}
 	
-	public void setLayer(int layer) {
-		this.layer = layer;
+	public void setOffset(int layer) {
+		this.offset = layer;
 	}
 	
-	public void increaseLayer() {
-		layer++;
+	public void increaseOffset() {
+		offset++;
 	}
 	
-	public void decreaseLayer() {
-		layer--;
+	public void decreaseOffset() {
+		offset--;
 	}
 	
 	public String getString() {

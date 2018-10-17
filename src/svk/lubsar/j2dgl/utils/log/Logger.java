@@ -50,11 +50,11 @@ public class Logger {
 	public static String toDebug() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 			
-		ret.append(Logger.class, DebugStringBuilder.STATIC_CONTENT);
-		ret.increaseLayer();
+		ret.appendInstanceInfo(Logger.class, DebugStringBuilder.STATIC_CONTENT);
+		ret.increaseOffset();
 		ret.append(globalLogs, "globalLogs");
 		ret.append(masterLog, "masterLog");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 			
 		return ret.getString();

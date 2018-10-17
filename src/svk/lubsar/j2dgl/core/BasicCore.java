@@ -122,7 +122,7 @@ public abstract class BasicCore extends Core {
 					BasicCore.this.ticks = ticksCumulated;
 					BasicCore.this.fps = fpsCumulated;
 					if(debug) {
-						MessageHandler.printMessage(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps + "delta: " + ((double)(now - lastTimeNano) / (updatesDelayMs * 1000000)));
+						MessageHandler.print(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps + "delta: " + ((double)(now - lastTimeNano) / (updatesDelayMs * 1000000)));
 					}
 					
 					lastTimeDebugOutput += 1000;
@@ -175,15 +175,15 @@ public abstract class BasicCore extends Core {
 	@Override
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
 		ret.appendln(super.toString());
-		ret.append("debug", debug);
-		ret.append("updatesDelayMs", updatesDelayMs);
-		ret.append("tps", ticks);
-		ret.append("fps", fps);
+		ret.appendPrimitive("debug", debug);
+		ret.appendPrimitive("updatesDelayMs", updatesDelayMs);
+		ret.appendPrimitive("tps", ticks);
+		ret.appendPrimitive("fps", fps);
 		ret.append(timer, "Timer");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

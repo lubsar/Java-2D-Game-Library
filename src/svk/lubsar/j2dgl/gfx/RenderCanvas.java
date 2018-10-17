@@ -50,12 +50,12 @@ public class RenderCanvas extends JPanel {
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 		
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
 		ret.appendln(super.toString());
-		ret.append("scale", scale);
+		ret.appendPrimitive("scale", scale);
 		ret.append(buffer, "renderBuffer");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

@@ -34,7 +34,7 @@ public class Keyboard extends KeyAdapter {
 			KeyListener[] listeners = component.getKeyListeners();
 			for(KeyListener list : listeners ) {
 				if(list.equals(INSTANCE)){
-					MessageHandler.printMessage("KEYBOARD", MessageHandler.INFO, "The mouse is already bound to this component " + component.toString());
+					MessageHandler.print("KEYBOARD", MessageHandler.INFO, "The mouse is already bound to this component " + component.toString());
 					return;
 				}
 			}
@@ -44,7 +44,7 @@ public class Keyboard extends KeyAdapter {
 			
 			boundTo++;
 		} else {
-			MessageHandler.printMessage("KEYBOARD", MessageHandler.ERROR, "Maximum number of bound components was reached !");
+			MessageHandler.print("KEYBOARD", MessageHandler.ERROR, "Maximum number of bound components was reached !");
 		}
 	}
 	
@@ -58,10 +58,10 @@ public class Keyboard extends KeyAdapter {
 					return;
 				}
 			}
-			MessageHandler.printMessage("KEYBOARD", MessageHandler.INFO, "MOUSE was not bound to this component" + component.toString());
+			MessageHandler.print("KEYBOARD", MessageHandler.INFO, "MOUSE was not bound to this component" + component.toString());
 			
 		} else {
-			MessageHandler.printMessage("KEYBOARD", MessageHandler.INFO, "MOUSE was not bound to any component.");
+			MessageHandler.print("KEYBOARD", MessageHandler.INFO, "MOUSE was not bound to any component.");
 		}
 	}
 	
@@ -134,13 +134,13 @@ public class Keyboard extends KeyAdapter {
 	
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
 		ret.append(pressedKeys, "pressedKeys");
 		ret.append((Object)recordedKeyChars, "recorderKeyChars");
-		ret.append("recordKeySequence", recordKeySequence);
-		ret.append("boundTo", boundTo);
-		ret.decreaseLayer();
+		ret.appendPrimitive("recordKeySequence", recordKeySequence);
+		ret.appendPrimitive("boundTo", boundTo);
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

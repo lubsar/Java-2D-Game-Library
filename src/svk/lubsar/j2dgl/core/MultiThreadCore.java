@@ -264,7 +264,7 @@ public abstract class MultiThreadCore extends Core {
 					
 				if((System.currentTimeMillis() - lastTimeDebugOutput) >= 1000){
 					if(debug) {
-						MessageHandler.printMessage(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps);
+						MessageHandler.print(MessageHandler.INFO, "ticks: " + ticks + " fps: " + fps);
 					}
 					lastTimeDebugOutput += 1000;
 					fps = renderer.cummulatedFPS;
@@ -282,17 +282,17 @@ public abstract class MultiThreadCore extends Core {
 	@Override
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
 		ret.appendln(super.toString());
-		ret.append("debug", debug);
-		ret.append("Updater sleep",(long) 1000 / ticksPerSecond);
-		ret.append("Renderer sleep",(long) 1000 / fpsLimit);
-		ret.append("ticksPerSecond", ticksPerSecond);
-		ret.append("fpsLimit", fpsLimit);
-		ret.append("tps", ticks);
-		ret.append("fps", fps);
-		ret.decreaseLayer();
+		ret.appendPrimitive("debug", debug);
+		ret.appendPrimitive("Updater sleep",(long) 1000 / ticksPerSecond);
+		ret.appendPrimitive("Renderer sleep",(long) 1000 / fpsLimit);
+		ret.appendPrimitive("ticksPerSecond", ticksPerSecond);
+		ret.appendPrimitive("fpsLimit", fpsLimit);
+		ret.appendPrimitive("tps", ticks);
+		ret.appendPrimitive("fps", fps);
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

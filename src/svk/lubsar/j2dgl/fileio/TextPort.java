@@ -3,102 +3,79 @@ package svk.lubsar.j2dgl.fileio;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 import svk.lubsar.j2dgl.utils.Constants;
-//TODO document, exceptions, saving, refactor (remove methods / reduce code duplication)
+
 public class TextPort {
-	public static String loadTextAsString(String path) {
+	public static String loadText(String path) {
 		File f = new File(path);
-		return loadTextAsString(f);
+		return loadText(f);
 	}
 	
-	public static String loadTextAsString(String path, String separator) {
+	public static String loadText(String path, String separator) {
 		File f = new File(path);
-		return loadTextAsString(f, separator);
+		return loadText(f, separator);
 	}
 	
-	public static String loadTextAsString(File file) {
-		return loadTextAsString(file, Constants.LINE_SEPARATOR);
+	public static String loadText(File file) {
+		return loadText(file, Constants.LINE_SEPARATOR);
 	}
 	
-	public static String loadTextAsString(File file, String separator) {
-		BufferedReader reader = null;
+	public static String loadText(File file, String separator) {
 		try {
-			reader = new BufferedReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return loadTextAsString(reader, separator);
-	}
-	
-	public static String loadTextAsString(Reader reader) {
-		return loadTextAsString(reader, Constants.LINE_SEPARATOR);
-	}
-	
-	public static String loadTextAsString(Reader reader, String separator) {
-		StringBuilder ret = new StringBuilder();
-		
-		try {
-			BufferedReader sreader = new BufferedReader(reader);
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			StringBuilder ret = new StringBuilder();
 			String line = "";
 			
 			do {
-				line = sreader.readLine();
+				line = reader.readLine();
 				ret.append(line);
 				ret.append(separator);
 			} while (line != null);
-			sreader.close();
-		} catch (IOException e ) {
+			
+			reader.close();
+			
+			return ret.toString();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return ret.toString();
+		return null;
 	}
 	
-	public static String[] loadTextAsStringArray(String path) {
+	public static String[] loadTextAsArray(String path) {
 		File f = new File(path);
-		return loadTextAsStringArray(f);
+		return loadTextAsArray(f);
 	}
 	
-	public static String[] loadTextAsStringArray(File file) {
-		BufferedReader reader = null;
+	public static String[] loadTextAsArray(File file) {
 		try {
-			reader = new BufferedReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		return loadTextAsStringArray(reader);
-	}
-	
-	public static String[] loadTextAsStringArray(Reader reader) {
-		List<String> ret = new ArrayList<String>();
-		
-		try {
-			BufferedReader sreader = new BufferedReader(reader);
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			
+			List<String> ret = new ArrayList<String>();
 			String line = "";
 			
 			do {
-				line = sreader.readLine();
-				ret.add(line);
+				line = reader.readLine();
+					ret.add(line);
 			} while (line != null);
+				
+			reader.close();
 			
-			sreader.close();
-		} catch (IOException e ) {
+			return (String[]) ret.toArray();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return  (String[]) ret.toArray();
+			
+		return null;
 	}
-	
-	public static void saveStringToFile(String string, File file) {
+		
+	public static void saveToFile(String string, File file) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			
@@ -111,51 +88,29 @@ public class TextPort {
 		}
 	}
 	
-	public static void saveStringToFile(String string, String path) {
-		saveStringToFile(string, new File(path));
+	public static void saveToFile(String string, String path) {
+		saveToFile(string, new File(path));
 	}
 	
-	public static void saveStringToFileSeparateLines(String string, String separator, File file) {
-		String[] strings = string.split(separator);
-		saveStringArrayToFile(strings, file, true);
-	}
-	
-	public static void saveStringToFileSeparateLines(String string, File file) {
-		String[] strings = string.split(Constants.LINE_SEPARATOR);
-		saveStringArrayToFile(strings, file, true);
-	}
-	
-	public static void saveStringToFileSeparateLines(String string, String path) {
-		File f = new File(path);
-		saveStringToFileSeparateLines(string, f);
-	}
-	
-	public static void saveStringToFileSeparateLines(String string, String separator, String path) {
-		File f = new File(path);
-		saveStringToFileSeparateLines(string, separator, f);
-	}
-	
-	public static void saveStringArrayToFile(String[] strings, File file, boolean separateStringsByLine) {
+	public static void saveToFile(String[] strings, File file, boolean stringPerLine) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			
 			for(String s : strings) {
 				writer.write(s);
-				if(separateStringsByLine)
+				if(stringPerLine)
 					writer.newLine();
 			}
 			
 			writer.flush();
 			writer.close();
-			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void saveStringArrayToFile(String[] strings, String path, boolean separateStringsByLine) {
+	public static void saveToFile(String[] strings, String path, boolean stringPerLine) {
 		File f = new File(path);
-		saveStringArrayToFile(strings, f, separateStringsByLine);
+		saveToFile(strings, f, stringPerLine);
 	}
 }

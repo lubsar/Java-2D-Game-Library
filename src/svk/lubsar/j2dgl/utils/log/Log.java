@@ -55,11 +55,11 @@ public abstract class Log extends PrintStream {
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 		
-		ret.append(this.getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(this.getClass(), hashCode());
+		ret.increaseOffset();
 		ret.appendln(super.toString());
-		ret.append("id", (Object)id);
-		ret.decreaseLayer();
+		ret.appendPrimitive("id", (Object)id);
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

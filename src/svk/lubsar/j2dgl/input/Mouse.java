@@ -45,7 +45,7 @@ public class Mouse extends MouseAdapter {
 			MouseListener[] listeners = component.getMouseListeners();
 			for(MouseListener list : listeners ) {
 				if(list.equals(INSTANCE)){
-					MessageHandler.printMessage("MOUSE", MessageHandler.INFO, "The mouse is already bound to this component " + component.toString());
+					MessageHandler.print("MOUSE", MessageHandler.INFO, "The mouse is already bound to this component " + component.toString());
 					return;
 				}
 			}
@@ -56,7 +56,7 @@ public class Mouse extends MouseAdapter {
 			
 			boundTo++;
 		} else {
-			MessageHandler.printMessage("MOUSE", MessageHandler.ERROR, "Maximum number of bound components was reached !");
+			MessageHandler.print("MOUSE", MessageHandler.ERROR, "Maximum number of bound components was reached !");
 		}
 	}
 	
@@ -72,10 +72,10 @@ public class Mouse extends MouseAdapter {
 					return;
 				}
 			}
-			MessageHandler.printMessage("MOUSE", MessageHandler.INFO, "MOUSE was not bound to this component" + component.toString());
+			MessageHandler.print("MOUSE", MessageHandler.INFO, "MOUSE was not bound to this component" + component.toString());
 			
 		} else {
-			MessageHandler.printMessage("MOUSE", MessageHandler.INFO, "MOUSE was not bound to any component.");
+			MessageHandler.print("MOUSE", MessageHandler.INFO, "MOUSE was not bound to any component.");
 		}
 	}
 	
@@ -205,16 +205,16 @@ public class Mouse extends MouseAdapter {
 	
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
-		ret.append(getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(getClass(), hashCode());
+		ret.increaseOffset();
 		ret.append(pressedButtons, "pressedButtons");
-		ret.append("x", x);
-		ret.append("y", y);
-		ret.append("inside", inside);
-		ret.append("mouseWheelRotated", mouseWheelRotated);
-		ret.append("mouseWheelRotation", mouseWheelRotation);
-		ret.append("boundTo", boundTo);
-		ret.decreaseLayer();
+		ret.appendPrimitive("x", x);
+		ret.appendPrimitive("y", y);
+		ret.appendPrimitive("inside", inside);
+		ret.appendPrimitive("mouseWheelRotated", mouseWheelRotated);
+		ret.appendPrimitive("mouseWheelRotation", mouseWheelRotation);
+		ret.appendPrimitive("boundTo", boundTo);
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();

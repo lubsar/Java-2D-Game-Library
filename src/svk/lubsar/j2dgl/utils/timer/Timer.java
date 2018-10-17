@@ -33,7 +33,7 @@ public class Timer {
 	
 	public static void update() {
 		if(!initialized) {
-			MessageHandler.printMessage("TIMER", MessageHandler.ERROR, "Timer is not initialized !");
+			MessageHandler.print("TIMER", MessageHandler.ERROR, "Timer is not initialized !");
 			throw new IllegalStateException("Timer is not initialized !");
 		}
 		
@@ -53,7 +53,7 @@ public class Timer {
 					task.update(1);
 					break;	
 				default:
-					MessageHandler.printMessage("TIMER", MessageHandler.ERROR, "Unknown time format:" + task.getTimeFormat() + "of task: " + task.toString());
+					MessageHandler.print("TIMER", MessageHandler.ERROR, "Unknown time format:" + task.getTimeFormat() + "of task: " + task.toString());
 					throw new RuntimeException("Unknown time format:" + task.getTimeFormat() + "of task: " + task.toString());
 				}
 			}

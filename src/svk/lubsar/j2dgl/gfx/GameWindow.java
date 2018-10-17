@@ -148,15 +148,15 @@ public class GameWindow extends JFrame {
 	public String toString() {
 		DebugStringBuilder ret = new DebugStringBuilder();
 		
-		ret.append(this.getClass(), hashCode());
-		ret.increaseLayer();
+		ret.appendInstanceInfo(this.getClass(), hashCode());
+		ret.increaseOffset();
 		ret.appendln(super.toString());
-		ret.append("widthScale", widthScale);
-		ret.append("heightScale", heightScale);
+		ret.appendPrimitive("widthScale", widthScale);
+		ret.appendPrimitive("heightScale", heightScale);
 		ret.append(renderBuffer, "screen");
 		ret.append(canvas, "canvas");
 		ret.append(device, "device");
-		ret.decreaseLayer();
+		ret.decreaseOffset();
 		ret.appendCloseBracket();
 		
 		return ret.getString();
