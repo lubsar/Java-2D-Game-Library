@@ -27,9 +27,13 @@ public class ImagePort {
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(ImagePort.class.getResource(path));
-		} catch (IOException e) {
-			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image as resource:" + path);
-			e.printStackTrace();
+		} catch (Exception e) {
+			if(MessageHandler.isEnabled()) {
+				MessageHandler.printError("IMAGE_PORT", MessageHandler.ERROR, "Exception occured when loading image as resource:" + path);
+				e.printStackTrace(MessageHandler.getErrorStream());
+			} else {
+				e.printStackTrace();
+			}
 		}
 		
 		return image;
@@ -45,9 +49,13 @@ public class ImagePort {
 		BufferedImage image = null;
 		try{
 			image = ImageIO.read(new File(path));			
-		}catch (IOException e){
-			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image:" + path);
-			e.printStackTrace();
+		}catch (Exception e){
+			if(MessageHandler.isEnabled()) {
+				MessageHandler.printError("IMAGE_PORT", MessageHandler.ERROR, "Exception occured when loading image from path:" + path);
+				e.printStackTrace(MessageHandler.getErrorStream());
+			} else {
+				e.printStackTrace();
+			}
 		}
 		return image;
 	}
@@ -61,9 +69,13 @@ public class ImagePort {
 		BufferedImage image = null;
 		try{
 			image = ImageIO.read(file);			
-		}catch (IOException e){
-			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "IOException occured when loading image:" + file);
-			e.printStackTrace();
+		}catch (Exception e){
+			if(MessageHandler.isEnabled()) {
+				MessageHandler.printError("IMAGE_PORT", MessageHandler.ERROR, "Exception occured when loading image from File: " + file.getAbsolutePath());
+				e.printStackTrace(MessageHandler.getErrorStream());
+			} else {
+				e.printStackTrace();
+			}
 		}
 		return image;
 	}
@@ -89,8 +101,12 @@ public class ImagePort {
 			ImageIO.write(image, format, new File(path));
 			return true;
 		} catch (Exception e) {
-			MessageHandler.print("IMAGE_PORT", MessageHandler.ERROR, "Exception occured when writing image " + image +" to: " + path);
-			e.printStackTrace();
+			if(MessageHandler.isEnabled()) {
+				MessageHandler.printError("IMAGE_PORT", MessageHandler.ERROR, "Exception occured while writing image to file:" + path);
+				e.printStackTrace(MessageHandler.getErrorStream());
+			} else {
+				e.printStackTrace();
+			}
 		}
 		
 		return false;

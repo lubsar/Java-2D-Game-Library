@@ -49,6 +49,10 @@ public class MessageHandler {
 	}
 	
 	public static void printError(String prefix, String tag, String message) {
+		if(!enabled) {
+			throw new RuntimeException("MessageHandler is disabled");
+		}
+		
 		if(prefix == null) {
 			errorStream.println(String.format("[%s] %s", tag, message));
 		} else {

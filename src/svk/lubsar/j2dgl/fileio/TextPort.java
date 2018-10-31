@@ -1,5 +1,6 @@
 package svk.lubsar.j2dgl.fileio;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,8 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import svk.lubsar.j2dgl.utils.Constants;
-
+/**
+* Utility class with static methods that load and save Strings and arrays of Strings from/to files.
+* 
+* @see #loadText(String)
+* @see #loadTextAsArray(String)
+* @see #saveToFile(String, String)
+* @see #saveToFile(String[], String, boolean)
+*/
 public class TextPort {
+	/**
+	 * Loads textfile on given path as class resource (see documentation).
+	 * @param path name of resource
+	 * @return resource as buffered image
+	 * @throws IOException if error occurs while loading the resource
+	 */
 	public static String loadText(String path) {
 		File f = new File(path);
 		return loadText(f);
